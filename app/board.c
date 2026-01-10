@@ -1,0 +1,12 @@
+#include "board.h"
+
+void board_init(void)
+{
+    RCC_AHB1PeriphClockCmd(RCC_AHB1ENR_GPIOAEN,ENABLE);
+    RCC_AHB1PeriphClockCmd(RCC_AHB1ENR_GPIOBEN,ENABLE);
+    RCC_AHB1PeriphClockCmd(RCC_AHB1ENR_GPIOCEN,ENABLE);
+    RCC_AHB1PeriphClockCmd(RCC_AHB1ENR_GPIODEN,ENABLE);
+    RCC_AHB1PeriphClockCmd(RCC_AHB1ENR_GPIOEEN,ENABLE);
+
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);
+}
