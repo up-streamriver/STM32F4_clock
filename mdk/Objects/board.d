@@ -44,4 +44,4 @@
 .\objects\board.o: ..\component\ringbuffer\ringbuffer.h
 .\objects\board.o: ..\driver\key.h
 .\objects\board.o: ..\driver\timer.h
-.\objects\board.o: ..\driver\bl24c512.h
+.\objects\board.o: ..\driver\aht20.h

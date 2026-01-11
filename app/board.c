@@ -11,5 +11,5 @@ void board_init(void)
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6,ENABLE);
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1,ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C2,ENABLE);
 }

@@ -38,10 +38,11 @@ int main(void)
 	key_init();
 	//timer_init();
 	timer_pwm_init();
-	bl24c512_init();
-	usart_write_string("initial success\r\n");
-	usart_printf("print success\r\n");
-
+	if(aht20_init())
+		usart_write_string("initial success\r\n");
+	usart_printf("initial end\r\n");
+		float humi;
+		float temp;
 
 	  while(1)
 		{
@@ -49,14 +50,29 @@ int main(void)
 			// delay_ms(500);
 			// led_set(true);
 			// delay_ms(500);
-			if(key_press())
+			if(!aht20_trigger_measure())
 			{
-				led_toggle();
+				usart_printf("measure failed\r\n");
 			}
-			uint8_t data;
-			if(rb8_gets(serial_rb,&data,1))
+			if(!aht20_wait_measure())
 			{
-				usart_printf("data:%d\r\n",data);
+				usart_printf("measure timeout\r\n");
 			}
+			if(!aht20_get_measure(&humi,&temp))
+			{
+				usart_printf("measure get failed\r\n");
+			}
+			usart_printf("humi: %.2f\r\n",humi);
+			usart_printf("temp: %.2f\r\n",temp);
+			delay_ms(1000 * 1000);
+			// if(key_press())
+			// {
+			// 	led_toggle();
+			// }
+			// uint8_t data;
+			// if(rb8_gets(serial_rb,&data,1))
+			// {
+			// 	usart_printf("data:%d\r\n",data);
+			// }
 		}
 }

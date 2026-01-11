@@ -161,7 +161,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\driver\bl24c512.c</Filename>
+          <Filename>E:\STM32F4_clock\driver\bl24c512.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\stm32f407\../driver/bl24c512.c\127</Expression>
         </Bp>
@@ -371,8 +371,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\driver\bl24c512.c</PathWithFileName>
-      <FilenameWithoutPath>bl24c512.c</FilenameWithoutPath>
+      <PathWithFileName>..\driver\aht20.c</PathWithFileName>
+      <FilenameWithoutPath>aht20.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
