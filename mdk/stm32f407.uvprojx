@@ -415,6 +415,21 @@
               <FileType>1</FileType>
               <FilePath>..\driver\led.c</FilePath>
             </File>
+            <File>
+              <FileName>key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\driver\key.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\driver\timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>bl24c512.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\driver\bl24c512.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

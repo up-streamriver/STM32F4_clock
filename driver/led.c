@@ -28,3 +28,10 @@ void led_set(bool status)
     GPIO_WriteBit(LED2_PORT,LED2_PIN,status? Bit_RESET:Bit_SET);
     GPIO_WriteBit(LED1_PORT,LED1_PIN,status? Bit_RESET:Bit_SET);
 }
+
+void led_toggle(void)
+{
+    uint8_t status = GPIO_ReadOutputDataBit(LED3_PORT,LED3_PIN);
+    bool state = (status == Bit_SET) ? true : false;
+    led_set(state);
+}

@@ -7,6 +7,6 @@
 
 void led_init(void);
 void led_set(bool status);
-
+void led_toggle(void);
 #endif
 /*LED_H */

@@ -6,7 +6,7 @@ static volatile uint32_t ticks;
 
 void delay_init(void)
 {
-    SysTick_Config( SystemCoreClock / 1000);
+    SysTick_Config( SystemCoreClock / 1000000);
 }
 
 void delay_ms(uint32_t ms)

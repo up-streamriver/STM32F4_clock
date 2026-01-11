@@ -42,3 +42,6 @@
 .\objects\main.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\string.h
 .\objects\main.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
 .\objects\main.o: ..\component\ringbuffer\ringbuffer.h
+.\objects\main.o: ..\driver\key.h
+.\objects\main.o: ..\driver\timer.h
+.\objects\main.o: ..\driver\bl24c512.h

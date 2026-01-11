@@ -7,6 +7,9 @@
 #include "led.h"
 #include "usart.h"
 #include "ringbuffer.h"
+#include "key.h"
+#include "timer.h"
+#include "bl24c512.h"
 
 void board_init(void);
 void delay_init(void);
