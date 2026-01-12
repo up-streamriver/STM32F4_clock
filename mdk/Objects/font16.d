@@ -1,8 +1,8 @@
 .\objects\font16.o: ..\app\font\font16.c
+.\objects\font16.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h
 .\objects\font16.o: ..\app\font\font.h
 .\objects\font16.o: ..\firmware\cmsis\device\stm32f4xx.h
 .\objects\font16.o: ..\firmware\cmsis\core\core_cm4.h
-.\objects\font16.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h
 .\objects\font16.o: ..\firmware\cmsis\core\core_cmInstr.h
 .\objects\font16.o: ..\firmware\cmsis\core\core_cmFunc.h
 .\objects\font16.o: ..\firmware\cmsis\core\core_cmSimd.h

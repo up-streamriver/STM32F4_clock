@@ -188,31 +188,23 @@ void st7789_fill_color(uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2,uint16_t 
     GPIO_SetBits(CS_PORT, CS_PIN);
 }
 
-void st7789_write_single_ascii(uint16_t x,uint16_t y,char ch,uint16_t color,uint16_t bg_color,font_t *font)
-{   
-    uint16_t fheight = font->height;
-    uint16_t fwidth = fheight / 2;
-    if(!st7789_is_in_range(x,y,x + fwidth -1,y + fheight - 1))
-    {
-        return;
-    }
-    st7789_setCursor(x,y,x + fwidth -1,y + fheight - 1);
-    st7789_set_gram_mode();
-    
+void st7789_draw_font(uint16_t x,uint16_t y,uint16_t width,uint16_t height,const uint8_t *model,uint16_t color,uint16_t bg_color)
+{
+    uint16_t bytes_per_row = (width+7) / 8;
     uint8_t color_data[2] = {(uint8_t)(color>>8) & 0xFF, color & 0xFF};
-    uint8_t bg_color_data[2] = {(uint8_t)(bg_color>>8) & 0xFF, bg_color & 0xFF};
+    uint8_t bg_color_data[2] = {(uint8_t)(bg_color>>8) & 0xFF, bg_color & 0xFF};  
+    st7789_setCursor(x,y,x + width -1,y + height - 1);
+    st7789_set_gram_mode();  
     
-    uint16_t bytes_per_row = (fwidth+7) / 8;
-    const uint8_t * model = font->model + (ch - ' ') * fheight * bytes_per_row;
-
     GPIO_ResetBits(CS_PORT, CS_PIN);
     GPIO_SetBits(DC_PORT, DC_PIN);
-    for(uint16_t row=0;row < fheight;row++)
+
+    for(uint16_t row=0;row < height;row++)
     {
-        const uint8_t *raw_data = model + row * bytes_per_row;
-        for(uint16_t column=0; column < fwidth;column++)
+        const uint8_t * row_data = model +  row * bytes_per_row;
+        for(uint16_t column=0; column < width;column++)
         {
-            uint8_t pixel = raw_data[column / 8] & (1<<(7 - column % 8));
+            uint8_t pixel = row_data[column / 8] & (1<<(7 - column % 8));
             if(pixel)
             {
                 SPI_SendData(SPI2, color_data[0]);
@@ -228,19 +220,85 @@ void st7789_write_single_ascii(uint16_t x,uint16_t y,char ch,uint16_t color,uint
                 while (SPI_GetFlagStatus(SPI2, SPI_FLAG_TXE) == RESET);                
             }
             
-        }
+        }       
     }
     while (SPI_GetFlagStatus(SPI2, SPI_FLAG_BSY) != RESET);
-    GPIO_SetBits(CS_PORT, CS_PIN);    
-
+    GPIO_SetBits(CS_PORT, CS_PIN);   
 }
 
-void st7789_write_ascii(uint16_t x, uint16_t y, char *str, uint16_t color, uint16_t bg_color, const font_t *font)
+void st7789_write_ascii(uint16_t x,uint16_t y,char ch,uint16_t color,uint16_t bg_color,const font_t *font)
 {
-    while(*str)
+    if(font == NULL)
     {
-        st7789_write_single_ascii(x, y, *str, color, bg_color, font);
-        x += font->height / 2;
-        str++;
+        return;
+    }
+    uint16_t fheight = font->size, fwidth = font->size / 2;
+    if(!st7789_is_in_range(x,y,x + fwidth -1,y + fheight - 1))
+    {
+        return;
+    }
+    if(ch < 0x20 || ch > 0x7E)
+    {
+        return;
+    }
+    uint16_t bytes_per_row = (fwidth + 7) / 8;
+	const uint8_t *model = font->ascii_model + (ch - ' ') * fheight * bytes_per_row;
+    st7789_draw_font(x, y, fwidth, fheight, model, color, bg_color);       
+}
+
+void st7789_write_chinese(uint16_t x, uint16_t y, char *ch, uint16_t color, uint16_t bg_color, const font_t *font)
+{
+    if(font == NULL || ch == NULL)
+    {
+        return;
+    }
+    uint16_t fheight = font->size, fwidth = font->size;
+    if(!st7789_is_in_range(x,y,x + fwidth -1,y + fheight - 1))
+    {
+        return;
+    }
+    const font_chinese_t *c = font->chinese;
+    for(;c->name != NULL;c++)
+    {
+        if(strcmp(c->name,ch) ==0)
+            break;
+    }
+    if(c->name == NULL)
+        return;
+    st7789_draw_font(x, y, fwidth, fheight, c->model, color, bg_color); 
+}
+
+
+static bool is_gb2312(char ch)
+{
+    return ((unsigned char)ch >= 0xA1 && (unsigned char)ch <= 0xF7);
+}
+
+
+void st7789_write_string(uint16_t x, uint16_t y, char *str, uint16_t color, uint16_t bg_color, const font_t *font)
+{
+    while (*str)
+    {
+        // int len = utf8_char_length(*str);
+        int len = is_gb2312(*str) ? 2 : 1;
+        if (len <= 0)
+        {
+            str++;
+            continue;
+        }
+        else if (len == 1)
+        {
+            st7789_write_ascii(x, y, *str, color, bg_color, font);
+            str++;
+            x += font->size / 2;
+        }
+        else
+        {
+            char ch[5];
+            strncpy(ch, str, len);
+            st7789_write_chinese(x, y, ch, color, bg_color, font);
+            str += len;
+            x += font->size;
+        }
     }
 }
