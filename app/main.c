@@ -41,11 +41,16 @@ int main(void)
 	timer_pwm_init();
 	usart_write_string("initial success\r\n");
 	usart_printf("initial end\r\n");
-    st7789_init();
     
-    st7789_fill_color(0, 0, 79, 319, mkcolor(255, 0, 0));
-    st7789_fill_color(80, 0, 159, 319, mkcolor(0, 255, 0));
-    st7789_fill_color(160, 0, 239, 319, mkcolor(0, 0, 255));
+//    st7789_fill_color(0, 0, 79, 319, mkcolor(255, 0, 0));
+//    st7789_fill_color(80, 0, 159, 319, mkcolor(0, 255, 0));
+//    st7789_fill_color(160, 0, 239, 319, mkcolor(0, 0, 255));
+//	delay_ms(1000 * 1000);
+	const uint16_t white = mkcolor(255, 255, 255);
+	const uint16_t black = mkcolor(0, 0, 0);
+    st7789_write_ascii(0, 0, "Hello World", white, black, &font16);
+    st7789_write_ascii(0, 16, "Hello World", white, black, &font32);
+    st7789_write_ascii(0, 48, "Hello World", white, black, &font48);
 	  while(1)
 		{
 

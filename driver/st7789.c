@@ -33,6 +33,8 @@ void st7789_init(void)
 {
     GPIO_InitTypeDef GPIO_Structure;
     GPIO_StructInit(&GPIO_Structure);
+    GPIO_SetBits(GPIOE, CS_PIN | RESET_PIN | DC_PIN | LED_PIN);
+    GPIO_ResetBits(LED_PIN, LED_PIN);
     GPIO_Structure.GPIO_Mode = GPIO_Mode_OUT;
     GPIO_Structure.GPIO_OType = GPIO_OType_PP;
     GPIO_Structure.GPIO_Pin = CS_PIN | RESET_PIN | DC_PIN | LED_PIN;
@@ -184,4 +186,61 @@ void st7789_fill_color(uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2,uint16_t 
     }
     while(SPI_GetFlagStatus(SPI2,SPI_I2S_FLAG_BSY) == SET);
     GPIO_SetBits(CS_PORT, CS_PIN);
+}
+
+void st7789_write_single_ascii(uint16_t x,uint16_t y,char ch,uint16_t color,uint16_t bg_color,font_t *font)
+{   
+    uint16_t fheight = font->height;
+    uint16_t fwidth = fheight / 2;
+    if(!st7789_is_in_range(x,y,x + fwidth -1,y + fheight - 1))
+    {
+        return;
+    }
+    st7789_setCursor(x,y,x + fwidth -1,y + fheight - 1);
+    st7789_set_gram_mode();
+    
+    uint8_t color_data[2] = {(uint8_t)(color>>8) & 0xFF, color & 0xFF};
+    uint8_t bg_color_data[2] = {(uint8_t)(bg_color>>8) & 0xFF, bg_color & 0xFF};
+    
+    uint16_t bytes_per_row = (fwidth+7) / 8;
+    const uint8_t * model = font->model + (ch - ' ') * fheight * bytes_per_row;
+
+    GPIO_ResetBits(CS_PORT, CS_PIN);
+    GPIO_SetBits(DC_PORT, DC_PIN);
+    for(uint16_t row=0;row < fheight;row++)
+    {
+        const uint8_t *raw_data = model + row * bytes_per_row;
+        for(uint16_t column=0; column < fwidth;column++)
+        {
+            uint8_t pixel = raw_data[column / 8] & (1<<(7 - column % 8));
+            if(pixel)
+            {
+                SPI_SendData(SPI2, color_data[0]);
+                while (SPI_GetFlagStatus(SPI2, SPI_FLAG_TXE) == RESET);
+                SPI_SendData(SPI2, color_data[1]);
+                while (SPI_GetFlagStatus(SPI2, SPI_FLAG_TXE) == RESET);                
+            }
+            else
+            {
+                SPI_SendData(SPI2, bg_color_data[0]);
+                while (SPI_GetFlagStatus(SPI2, SPI_FLAG_TXE) == RESET);
+                SPI_SendData(SPI2, bg_color_data[1]);
+                while (SPI_GetFlagStatus(SPI2, SPI_FLAG_TXE) == RESET);                
+            }
+            
+        }
+    }
+    while (SPI_GetFlagStatus(SPI2, SPI_FLAG_BSY) != RESET);
+    GPIO_SetBits(CS_PORT, CS_PIN);    
+
+}
+
+void st7789_write_ascii(uint16_t x, uint16_t y, char *str, uint16_t color, uint16_t bg_color, const font_t *font)
+{
+    while(*str)
+    {
+        st7789_write_single_ascii(x, y, *str, color, bg_color, font);
+        x += font->height / 2;
+        str++;
+    }
 }

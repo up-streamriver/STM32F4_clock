@@ -37,3 +37,7 @@
 .\objects\st7789.o: ..\firmware\driver\inc\stm32f4xx_fsmc.h
 .\objects\st7789.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
 .\objects\st7789.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
+.\objects\st7789.o: ..\app\font\font.h
+.\objects\st7789.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdio.h
+.\objects\st7789.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\string.h
+.\objects\st7789.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
