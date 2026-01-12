@@ -36,35 +36,41 @@ int main(void)
 	usart_recv_handler_register(usart_recv_handler);
 	usart_init();
 	key_init();
+	st7789_init();
 	//timer_init();
 	timer_pwm_init();
-	if(aht20_init())
-		usart_write_string("initial success\r\n");
+	usart_write_string("initial success\r\n");
 	usart_printf("initial end\r\n");
-		float humi;
-		float temp;
-
+    st7789_init();
+    
+    st7789_fill_color(0, 0, 79, 319, mkcolor(255, 0, 0));
+    st7789_fill_color(80, 0, 159, 319, mkcolor(0, 255, 0));
+    st7789_fill_color(160, 0, 239, 319, mkcolor(0, 0, 255));
 	  while(1)
 		{
+
+		}
+}
+
 			// led_set(false);
 			// delay_ms(500);
 			// led_set(true);
 			// delay_ms(500);
-			if(!aht20_trigger_measure())
-			{
-				usart_printf("measure failed\r\n");
-			}
-			if(!aht20_wait_measure())
-			{
-				usart_printf("measure timeout\r\n");
-			}
-			if(!aht20_get_measure(&humi,&temp))
-			{
-				usart_printf("measure get failed\r\n");
-			}
-			usart_printf("humi: %.2f\r\n",humi);
-			usart_printf("temp: %.2f\r\n",temp);
-			delay_ms(1000 * 1000);
+			// if(!aht20_trigger_measure())
+			// {
+			// 	usart_printf("measure failed\r\n");
+			// }
+			// if(!aht20_wait_measure())
+			// {
+			// 	usart_printf("measure timeout\r\n");
+			// }
+			// if(!aht20_get_measure(&humi,&temp))
+			// {
+			// 	usart_printf("measure get failed\r\n");
+			// }
+			// usart_printf("humi: %.2f\r\n",humi);
+			// usart_printf("temp: %.2f\r\n",temp);
+			// delay_ms(1000 * 1000);
 			// if(key_press())
 			// {
 			// 	led_toggle();
@@ -74,5 +80,3 @@ int main(void)
 			// {
 			// 	usart_printf("data:%d\r\n",data);
 			// }
-		}
-}

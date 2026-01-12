@@ -9,7 +9,7 @@
 #include "ringbuffer.h"
 #include "key.h"
 #include "timer.h"
-#include "aht20.h"
+#include "st7789.h"
 
 void board_init(void);
 void delay_init(void);

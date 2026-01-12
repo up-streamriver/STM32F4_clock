@@ -1,0 +1,187 @@
+#include "st7789.h"
+/*
+SPI2 SCK PB13
+SPI2 MISO PC2
+SPI2 MOSI PC3
+
+LCD_CS PE2
+LCD_RESET PE3
+LCD_DC PE4
+LCD_LED PE5
+*/
+
+#define CS_PORT GPIOE
+#define CS_PIN GPIO_Pin_2
+
+#define RESET_PORT GPIOE
+#define RESET_PIN GPIO_Pin_3
+
+#define DC_PORT GPIOE
+#define DC_PIN GPIO_Pin_4
+
+#define LED_PORT GPIOE
+#define LED_PIN GPIO_Pin_5
+
+extern void delay_ms(uint32_t ms);
+
+#define spi_delay_us(x) delay_ms(x)
+#define spi_delay_ms(x) delay_ms((x) * 1000)
+
+static void st7789_init_display(void);
+
+void st7789_init(void)
+{
+    GPIO_InitTypeDef GPIO_Structure;
+    GPIO_StructInit(&GPIO_Structure);
+    GPIO_Structure.GPIO_Mode = GPIO_Mode_OUT;
+    GPIO_Structure.GPIO_OType = GPIO_OType_PP;
+    GPIO_Structure.GPIO_Pin = CS_PIN | RESET_PIN | DC_PIN | LED_PIN;
+    GPIO_Structure.GPIO_PuPd = GPIO_PuPd_UP;
+    GPIO_Structure.GPIO_Speed = GPIO_Speed_100MHz;
+    GPIO_Init(GPIOE,&GPIO_Structure);
+
+    GPIO_Structure.GPIO_Mode = GPIO_Mode_AF;
+    GPIO_Structure.GPIO_Pin = GPIO_Pin_13;
+    GPIO_Structure.GPIO_PuPd = GPIO_PuPd_UP;
+    GPIO_Init(GPIOB,&GPIO_Structure);
+
+    GPIO_Structure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3;
+    GPIO_Init(GPIOC,&GPIO_Structure);
+
+    GPIO_PinAFConfig(GPIOB,GPIO_PinSource13,GPIO_AF_SPI2);
+    GPIO_PinAFConfig(GPIOC,GPIO_PinSource2,GPIO_AF_SPI2);
+    GPIO_PinAFConfig(GPIOC,GPIO_PinSource3,GPIO_AF_SPI2);
+
+    SPI_InitTypeDef SPI_Structure;
+    SPI_StructInit(&SPI_Structure);
+    SPI_Structure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
+    SPI_Structure.SPI_CPHA = SPI_CPHA_1Edge;
+    SPI_Structure.SPI_CPOL = SPI_CPOL_Low;
+    SPI_Structure.SPI_DataSize = SPI_DataSize_8b;
+    SPI_Structure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+    SPI_Structure.SPI_FirstBit = SPI_FirstBit_MSB;
+    SPI_Structure.SPI_Mode = SPI_Mode_Master;
+    SPI_Structure.SPI_NSS = SPI_NSS_Soft;
+    SPI_Init(SPI2,&SPI_Structure);
+    SPI_Cmd(SPI2,ENABLE);
+    
+    st7789_init_display();
+}
+
+static void st7789_write_register(uint8_t reg,uint8_t data[],uint16_t length)
+{
+    GPIO_ResetBits(CS_PORT,CS_PIN);
+    GPIO_ResetBits(DC_PORT,DC_PIN);
+    SPI_SendData(SPI2,reg);
+    while(SPI_GetFlagStatus(SPI2,SPI_I2S_FLAG_TXE) == RESET);
+    while(SPI_GetFlagStatus(SPI2,SPI_I2S_FLAG_BSY) == SET);
+
+    GPIO_SetBits(DC_PORT,DC_PIN);
+    for(uint16_t i=0;i<length;i++)
+    {
+        SPI_SendData(SPI2,data[i]);
+        while(SPI_GetFlagStatus(SPI2,SPI_I2S_FLAG_TXE) == RESET);
+    }
+    while(SPI_GetFlagStatus(SPI2,SPI_I2S_FLAG_BSY) == SET);
+
+    GPIO_SetBits(CS_PORT,CS_PIN);
+
+}
+
+static void st7789_reset(void)
+{
+    GPIO_ResetBits(RESET_PORT,RESET_PIN);
+    spi_delay_us(20);
+    GPIO_SetBits(RESET_PORT, RESET_PIN);
+    delay_ms(120);
+}
+
+static void st7789_set_backlight(bool on)
+{
+    GPIO_WriteBit(LED_PORT, LED_PIN, on ? Bit_SET : Bit_RESET);
+}
+
+
+static void st7789_init_display(void)
+{
+    st7789_reset();
+    
+    st7789_write_register(0x11,NULL,0); //sleep out
+
+    spi_delay_ms(5);
+
+    st7789_write_register(0x36,(uint8_t[]){0x00},1); //Memory Data Access Control 基本显示配置
+    st7789_write_register(0x3A,(uint8_t[]){0x55},1); //设置颜色格式rgb565
+    st7789_write_register(0xB2,(uint8_t[]){0x0C,0x0C,0x00,0x33,0x33},5); //设置前廊、后廊等时序参数
+    st7789_write_register(0xB7,(uint8_t[]){0x46},1); //设置门控扫描方式
+    st7789_write_register(0xBB,(uint8_t[]){0x1B},1);
+    st7789_write_register(0xC0,(uint8_t[]){0x2C},1);
+    st7789_write_register(0xC2,(uint8_t[]){0x01},1);
+    st7789_write_register(0xC3,(uint8_t[]){0x0F},1);
+    st7789_write_register(0xC4,(uint8_t[]){0x20},1);
+    st7789_write_register(0xC6,(uint8_t[]){0x0F},1); // 设置正常模式下的帧率，0x0F表示约60Hz
+    st7789_write_register(0xD0,(uint8_t[]){0xA4,0xA1},2);
+    st7789_write_register(0xD6,(uint8_t[]){0xA1},1);
+    st7789_write_register(0xE0,(uint8_t[]){0xF0,0x00,0x06,0x04,0x05,0x05,0x31,0x44,0x48,0x36,0x12,0x12,0x2B,0x34},14);
+    st7789_write_register(0xE1,(uint8_t[]){0xF0,0x0B,0x0F,0x0F,0x0D,0x26,0x31,0x43,0x47,0x38,0x14,0x14,0x2C,0x32},14);
+    st7789_write_register(0x21,NULL,0);
+    st7789_write_register(0x29,NULL,0);
+
+    st7789_fill_color(0, 0, st7789_WIDTH - 1, st7789_HEIGHT - 1, 0x0000);
+    st7789_set_backlight(true);    
+
+}
+
+static bool st7789_is_in_range(uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2)
+{
+    if(x1 > st7789_WIDTH || x2 > st7789_WIDTH)
+    {
+        return false;
+    }
+    if(y1 > st7789_HEIGHT || y2 > st7789_HEIGHT)
+    {
+        return false;
+    }
+    if(x1 > x2 || y1 > y2)
+    {
+        return false;
+    }    
+    return true;
+}
+
+static void st7789_setCursor(uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2)
+{
+    st7789_write_register(0x2A,(uint8_t []){(x1>>8) & 0xFF,x1 & 0xFF,(x2>>8) & 0xFF,x2 & 0xFF},4);
+    st7789_write_register(0x2B,(uint8_t []){(y1>>8) & 0xFF,y1 & 0xFF,(y2>>8) & 0xFF,y2 & 0xFF},4);  
+}
+
+static void st7789_set_gram_mode(void)
+{
+    st7789_write_register(0x2C,NULL,0);
+}
+
+void st7789_fill_color(uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2,uint16_t color)
+{
+    if(!st7789_is_in_range(x1,y1,x2,y2))
+    {
+        return;
+    }
+    st7789_setCursor(x1,y1,x2,y2);
+    st7789_set_gram_mode();
+
+    uint8_t color_data[2] = {(uint8_t)(color>>8) & 0xFF, color & 0xFF};
+    uint32_t pixels = (x2 - x1 + 1) * (y2 - y1 + 1);
+
+    GPIO_ResetBits(CS_PORT, CS_PIN);
+    GPIO_SetBits(DC_PORT, DC_PIN);
+
+    for(uint32_t i=0;i < pixels;i++)
+    {
+        SPI_SendData(SPI2, color_data[0]);
+        while(SPI_GetFlagStatus(SPI2,SPI_I2S_FLAG_TXE) == RESET);
+        SPI_SendData(SPI2, color_data[1]);
+        while(SPI_GetFlagStatus(SPI2,SPI_I2S_FLAG_TXE) == RESET);
+    }
+    while(SPI_GetFlagStatus(SPI2,SPI_I2S_FLAG_BSY) == SET);
+    GPIO_SetBits(CS_PORT, CS_PIN);
+}

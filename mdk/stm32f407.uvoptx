@@ -371,8 +371,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\driver\aht20.c</PathWithFileName>
-      <FilenameWithoutPath>aht20.c</FilenameWithoutPath>
+      <PathWithFileName>..\driver\st7789.c</PathWithFileName>
+      <FilenameWithoutPath>st7789.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

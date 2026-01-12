@@ -6,7 +6,7 @@
 ".\objects\led.o"
 ".\objects\key.o"
 ".\objects\timer.o"
-".\objects\aht20.o"
+".\objects\st7789.o"
 ".\objects\startup_stm32f40_41xxx.o"
 ".\objects\system_stm32f4xx.o"
 ".\objects\misc.o"

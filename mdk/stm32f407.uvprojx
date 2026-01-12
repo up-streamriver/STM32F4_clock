@@ -426,9 +426,9 @@
               <FilePath>..\driver\timer.c</FilePath>
             </File>
             <File>
-              <FileName>aht20.c</FileName>
+              <FileName>st7789.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\driver\aht20.c</FilePath>
+              <FilePath>..\driver\st7789.c</FilePath>
             </File>
           </Files>
         </Group>

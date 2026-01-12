@@ -44,4 +44,5 @@
 .\objects\main.o: ..\component\ringbuffer\ringbuffer.h
 .\objects\main.o: ..\driver\key.h
 .\objects\main.o: ..\driver\timer.h
-.\objects\main.o: ..\driver\aht20.h
+.\objects\main.o: ..\driver\st7789.h
+.\objects\main.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
