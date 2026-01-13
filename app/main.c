@@ -46,10 +46,11 @@ int main(void)
 //    st7789_fill_color(80, 0, 159, 319, mkcolor(0, 255, 0));
 //    st7789_fill_color(160, 0, 239, 319, mkcolor(0, 0, 255));
 //	delay_ms(1000 * 1000);
-		const uint16_t white = mkcolor(255, 255, 255);
+	const uint16_t white = mkcolor(255, 255, 255);
 	const uint16_t black = mkcolor(0, 0, 0);
 	st7789_write_string(0,16,"hello world",white,black,&font16);
 	st7789_write_string(0,48,"√∑ª®«∂»Î Ω",white,black,&font32);
+	st7789_draw_image(0,80,&font_image);
 	  while(1)
 		{
 

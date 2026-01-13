@@ -41,3 +41,4 @@
 .\objects\st7789.o: ..\app\font\font.h
 .\objects\st7789.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdio.h
 .\objects\st7789.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
+.\objects\st7789.o: ..\app\font\image.h

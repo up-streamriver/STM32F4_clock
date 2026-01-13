@@ -6,6 +6,7 @@
 ".\objects\font16.o"
 ".\objects\font32.o"
 ".\objects\font48.o"
+".\objects\image_tv.o"
 ".\objects\led.o"
 ".\objects\key.o"
 ".\objects\timer.o"

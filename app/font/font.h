@@ -20,6 +20,8 @@ typedef struct
     const font_chinese_t * chinese;
 }font_t;
 
+
+
 extern const font_t font16;
 extern const font_t font32;
 extern const font_t font48;

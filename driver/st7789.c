@@ -188,7 +188,7 @@ void st7789_fill_color(uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2,uint16_t 
     GPIO_SetBits(CS_PORT, CS_PIN);
 }
 
-void st7789_draw_font(uint16_t x,uint16_t y,uint16_t width,uint16_t height,const uint8_t *model,uint16_t color,uint16_t bg_color)
+static void st7789_draw_font(uint16_t x,uint16_t y,uint16_t width,uint16_t height,const uint8_t *model,uint16_t color,uint16_t bg_color)
 {
     uint16_t bytes_per_row = (width+7) / 8;
     uint8_t color_data[2] = {(uint8_t)(color>>8) & 0xFF, color & 0xFF};
@@ -226,7 +226,7 @@ void st7789_draw_font(uint16_t x,uint16_t y,uint16_t width,uint16_t height,const
     GPIO_SetBits(CS_PORT, CS_PIN);   
 }
 
-void st7789_write_ascii(uint16_t x,uint16_t y,char ch,uint16_t color,uint16_t bg_color,const font_t *font)
+static void st7789_write_ascii(uint16_t x,uint16_t y,char ch,uint16_t color,uint16_t bg_color,const font_t *font)
 {
     if(font == NULL)
     {
@@ -246,7 +246,7 @@ void st7789_write_ascii(uint16_t x,uint16_t y,char ch,uint16_t color,uint16_t bg
     st7789_draw_font(x, y, fwidth, fheight, model, color, bg_color);       
 }
 
-void st7789_write_chinese(uint16_t x, uint16_t y, char *ch, uint16_t color, uint16_t bg_color, const font_t *font)
+static void st7789_write_chinese(uint16_t x, uint16_t y, char *ch, uint16_t color, uint16_t bg_color, const font_t *font)
 {
     if(font == NULL || ch == NULL)
     {
@@ -298,7 +298,34 @@ void st7789_write_string(uint16_t x, uint16_t y, char *str, uint16_t color, uint
             strncpy(ch, str, len);
             st7789_write_chinese(x, y, ch, color, bg_color, font);
             str += len;
-            x += font->size;
+            x += font->size; 
         }
     }
+}
+
+void st7789_draw_image(uint16_t x, uint16_t y,const font_image_t *font_image)
+{
+    uint16_t height = font_image ->height;
+    uint16_t width = font_image ->width;
+    if(!st7789_is_in_range(x,y,x + width - 1,y + height - 1))
+    {
+        return;
+    }
+    st7789_setCursor(x,y,x + width -1,y + height - 1);
+    st7789_set_gram_mode();  
+    
+    GPIO_ResetBits(CS_PORT, CS_PIN);
+    GPIO_SetBits(DC_PORT, DC_PIN);
+
+    uint32_t length = height * width * 2;
+    uint8_t * data = font_image ->image_model;
+    for(uint32_t i=0;i < length; i += 2)
+    {
+        SPI_SendData(SPI2, data[i+1]);
+        while (SPI_GetFlagStatus(SPI2, SPI_FLAG_TXE) == RESET);        
+        SPI_SendData(SPI2, data[i]);
+        while (SPI_GetFlagStatus(SPI2, SPI_FLAG_TXE) == RESET);                  
+    }
+    while (SPI_GetFlagStatus(SPI2, SPI_FLAG_BSY) != RESET);
+    GPIO_SetBits(CS_PORT, CS_PIN);       
 }

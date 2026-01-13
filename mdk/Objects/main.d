@@ -47,3 +47,4 @@
 .\objects\main.o: ..\driver\st7789.h
 .\objects\main.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
 .\objects\main.o: ..\app\font\font.h
+.\objects\main.o: ..\app\font\image.h

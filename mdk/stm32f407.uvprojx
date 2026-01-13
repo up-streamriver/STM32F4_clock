@@ -425,6 +425,11 @@
               <FileType>1</FileType>
               <FilePath>..\app\font\font48.c</FilePath>
             </File>
+            <File>
+              <FileName>image_tv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\font\image_tv.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
