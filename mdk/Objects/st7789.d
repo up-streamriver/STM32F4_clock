@@ -1,5 +1,5 @@
-.\objects\st7789.o: ..\driver\st7789.c
-.\objects\st7789.o: ..\driver\st7789.h
+.\objects\st7789.o: ..\driver\st7789\st7789.c
+.\objects\st7789.o: ..\driver\st7789\st7789.h
 .\objects\st7789.o: ..\firmware\cmsis\device\stm32f4xx.h
 .\objects\st7789.o: ..\firmware\cmsis\core\core_cm4.h
 .\objects\st7789.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h

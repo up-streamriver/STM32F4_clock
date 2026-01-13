@@ -4,9 +4,7 @@
 #define USART1_TX_PIN GPIO_Pin_9
 #define USART1_RX_PIN GPIO_Pin_10
 
-#define USART2_PORT GPIOA
-#define USART2_TX_PIN GPIO_Pin_2
-#define USART2_RX_PIN GPIO_Pin_3
+
 usart_recv_callback_t usart_recv_callback;
 
 void usart_recv_handler_register(usart_recv_callback_t callback)
@@ -69,8 +67,9 @@ void usart_write_string(const char *str)
 
 void usart_printf(char * format,...)
 {
-    char buffer[128];
+    static char buffer[512];
     va_list arg;
+    memset(buffer,0,sizeof(buffer));
     va_start(arg,format);
     vsnprintf(buffer,sizeof(buffer),format,arg);
     va_end(arg);

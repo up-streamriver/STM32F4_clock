@@ -1,5 +1,5 @@
-.\objects\led.o: ..\driver\led.c
-.\objects\led.o: ..\driver\led.h
+.\objects\led.o: ..\driver\led\led.c
+.\objects\led.o: ..\driver\led\led.h
 .\objects\led.o: ..\firmware\cmsis\device\stm32f4xx.h
 .\objects\led.o: ..\firmware\cmsis\core\core_cm4.h
 .\objects\led.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h

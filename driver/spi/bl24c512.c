@@ -7,7 +7,7 @@ I2C1 SDA PB7
 
 #define BL24C512_PAGE_SIZE 128
 
-extern void delay_ms(uint32_t ms);
+extern void delay_us(uint32_t ms);
 
 void bl24c512_init(void)
 {
@@ -38,7 +38,7 @@ void bl24c512_init(void)
     do{ \
         uint32_t timeout = TIMEOUT; \ 
         while(!I2C_CheckEvent(I2C1,EVENT) && timeout > 0){\
-            delay_ms(10); \
+            delay_us(10); \
             timeout -= 10; \
         }\
         if(timeout <= 0) \
@@ -62,7 +62,7 @@ static bool bl24c512_wait_ready(uint32_t timeout)
     {
         if(bl24c512_ready())
             return true;
-        delay_ms(10);
+        delay_us(10);
         timeout -= 10;
     }
     return false;

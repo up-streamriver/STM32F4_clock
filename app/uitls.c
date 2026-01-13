@@ -2,22 +2,27 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-static volatile uint32_t ticks;
+static volatile uint64_t ticks;
 
 void delay_init(void)
 {
     SysTick_Config( SystemCoreClock / 1000000);
 }
 
-void delay_ms(uint32_t ms)
+void delay_us(uint64_t us)
 {
-    uint32_t start = ticks;
-    while(ticks - start < ms);
+    uint64_t start = ticks;
+    while(ticks - start < us);
 }
 
-uint32_t bl_now(void)
+uint64_t bl_now_us(void)
 {
     return ticks;
+}
+
+uint64_t bl_now_ms(void)
+{
+    return ticks / 1000;
 }
 
 void SysTick_Handler(void)

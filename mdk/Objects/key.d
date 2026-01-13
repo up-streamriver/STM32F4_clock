@@ -1,5 +1,5 @@
-.\objects\key.o: ..\driver\key.c
-.\objects\key.o: ..\driver\key.h
+.\objects\key.o: ..\driver\key\key.c
+.\objects\key.o: ..\driver\key\key.h
 .\objects\key.o: ..\firmware\cmsis\device\stm32f4xx.h
 .\objects\key.o: ..\firmware\cmsis\core\core_cm4.h
 .\objects\key.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h
@@ -38,6 +38,6 @@
 .\objects\key.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdio.h
 .\objects\key.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
 .\objects\key.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\string.h
-.\objects\key.o: ..\driver\led.h
+.\objects\key.o: ..\driver\led\led.h
 .\objects\key.o: ..\app\usart.h
 .\objects\key.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h

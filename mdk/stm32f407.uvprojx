@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER,HSE_VALUE=8000000</Define>
               <Undefine></Undefine>
-              <IncludePath>..\firmware\cmsis\core;..\firmware\cmsis\device;..\firmware\driver\inc;..\driver;..\app;..\component\ringbuffer;..\app\font</IncludePath>
+              <IncludePath>..\firmware\cmsis\core;..\firmware\cmsis\device;..\firmware\driver\inc;..\driver;..\app;..\component\ringbuffer;..\app\font;..\driver\led;..\driver\key;..\driver\st7789;..\driver\timer;..\driver\esp_at</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -405,6 +405,11 @@
               <FileType>1</FileType>
               <FilePath>..\app\usart.c</FilePath>
             </File>
+            <File>
+              <FileName>weather.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\weather.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -434,26 +439,54 @@
         </Group>
         <Group>
           <GroupName>driver</GroupName>
+        </Group>
+        <Group>
+          <GroupName>driver/led</GroupName>
           <Files>
             <File>
               <FileName>led.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\driver\led.c</FilePath>
+              <FilePath>..\driver\led\led.c</FilePath>
             </File>
-            <File>
-              <FileName>key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\driver\key.c</FilePath>
-            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>driver/timer</GroupName>
+          <Files>
             <File>
               <FileName>timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\driver\timer.c</FilePath>
+              <FilePath>..\driver\timer\timer.c</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>driver/st7789</GroupName>
+          <Files>
             <File>
               <FileName>st7789.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\driver\st7789.c</FilePath>
+              <FilePath>..\driver\st7789\st7789.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>driver/key</GroupName>
+          <Files>
+            <File>
+              <FileName>key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\driver\key\key.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>driver/esp_at</GroupName>
+          <Files>
+            <File>
+              <FileName>esp_at.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\driver\esp_at\esp_at.c</FilePath>
             </File>
           </Files>
         </Group>

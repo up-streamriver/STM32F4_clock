@@ -1,5 +1,5 @@
-.\objects\timer.o: ..\driver\timer.c
-.\objects\timer.o: ..\driver\timer.h
+.\objects\timer.o: ..\driver\timer\timer.c
+.\objects\timer.o: ..\driver\timer\timer.h
 .\objects\timer.o: ..\firmware\cmsis\device\stm32f4xx.h
 .\objects\timer.o: ..\firmware\cmsis\core\core_cm4.h
 .\objects\timer.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h
@@ -38,6 +38,6 @@
 .\objects\timer.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdio.h
 .\objects\timer.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
 .\objects\timer.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\string.h
-.\objects\timer.o: ..\driver\led.h
+.\objects\timer.o: ..\driver\led\led.h
 .\objects\timer.o: ..\app\usart.h
 .\objects\timer.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h

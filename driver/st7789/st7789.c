@@ -22,10 +22,10 @@ LCD_LED PE5
 #define LED_PORT GPIOE
 #define LED_PIN GPIO_Pin_5
 
-extern void delay_ms(uint32_t ms);
+extern void delay_us(uint32_t us);
 
-#define spi_delay_us(x) delay_ms(x)
-#define spi_delay_ms(x) delay_ms((x) * 1000)
+#define spi_delay_us(x) delay_us(x)
+#define spi_delay_ms(x) delay_us((x) * 1000)
 
 static void st7789_init_display(void);
 
@@ -95,7 +95,7 @@ static void st7789_reset(void)
     GPIO_ResetBits(RESET_PORT,RESET_PIN);
     spi_delay_us(20);
     GPIO_SetBits(RESET_PORT, RESET_PIN);
-    delay_ms(120);
+    spi_delay_ms(120);
 }
 
 static void st7789_set_backlight(bool on)

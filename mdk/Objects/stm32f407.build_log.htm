@@ -27,13 +27,102 @@ Project File Date:  01/13/2026
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'F:\Keil_v5\ARM\ARMCOMPLIER506\Bin'
 Build target 'stm32f407'
-compiling image_tv.c...
-..\app\font\image_tv.c(7213): warning:  #1-D: last line of file ends without a newline
-  };
-..\app\font\image_tv.c: 1 warning, 0 errors
+compiling weather.c...
+..\app\weather.h(23): warning:  #1-D: last line of file ends without a newline
+  /*WEATHER_H */
+..\app\weather.c(32): warning:  #181-D: argument is incompatible with corresponding format string conversion
+          sscanf(code_response,"\"text\": \"%d\"",info->weather_code);
+..\app\weather.c(44): warning:  #1-D: last line of file ends without a newline
+  }
+..\app\weather.c: 3 warnings, 0 errors
+compiling board.c...
+..\driver\led\led.h(12): warning:  #1-D: last line of file ends without a newline
+  /*LED_H */
+..\app\usart.h(18): warning:  #1-D: last line of file ends without a newline
+  /*USART_H */
+..\component\ringbuffer\ringbuffer.h(16): warning:  #1-D: last line of file ends without a newline
+  /*RINGBUFFER_H */
+..\driver\key\key.h(16): warning:  #1-D: last line of file ends without a newline
+  /*KEY_H */
+..\driver\timer\timer.h(15): warning:  #1-D: last line of file ends without a newline
+  /*TIMER_H */
+..\app\font\font.h(30): warning:  #1-D: last line of file ends without a newline
+  /*FONT_H */
+..\driver\st7789\st7789.h(22): warning:  #1-D: last line of file ends without a newline
+  /*ST7789_H */
+..\driver\esp_at\esp_at.h(18): warning:  #65-D: expected a ";"
+  }esp_wifi_info_t;
+..\driver\esp_at\esp_at.h(31): warning:  #1-D: last line of file ends without a newline
+  /*ESP_AT_H */
+..\app\weather.h(23): warning:  #1-D: last line of file ends without a newline
+  /*WEATHER_H */
+..\app\board.h(24): warning:  #1-D: last line of file ends without a newline
+  /*BOARD_H */
+..\app\board.c(17): warning:  #1-D: last line of file ends without a newline
+  }
+..\app\board.c: 12 warnings, 0 errors
+compiling main.c...
+..\driver\led\led.h(12): warning:  #1-D: last line of file ends without a newline
+  /*LED_H */
+..\app\usart.h(18): warning:  #1-D: last line of file ends without a newline
+  /*USART_H */
+..\component\ringbuffer\ringbuffer.h(16): warning:  #1-D: last line of file ends without a newline
+  /*RINGBUFFER_H */
+..\driver\key\key.h(16): warning:  #1-D: last line of file ends without a newline
+  /*KEY_H */
+..\driver\timer\timer.h(15): warning:  #1-D: last line of file ends without a newline
+  /*TIMER_H */
+..\app\font\font.h(30): warning:  #1-D: last line of file ends without a newline
+  /*FONT_H */
+..\driver\st7789\st7789.h(22): warning:  #1-D: last line of file ends without a newline
+  /*ST7789_H */
+..\driver\esp_at\esp_at.h(18): warning:  #65-D: expected a ";"
+  }esp_wifi_info_t;
+..\driver\esp_at\esp_at.h(31): warning:  #1-D: last line of file ends without a newline
+  /*ESP_AT_H */
+..\app\weather.h(23): warning:  #1-D: last line of file ends without a newline
+  /*WEATHER_H */
+..\app\board.h(24): warning:  #1-D: last line of file ends without a newline
+  /*BOARD_H */
+..\app\main.c(31): warning:  #940-D: missing return statement at end of non-void function "key_press" 
+  }
+..\app\main.c(67): warning:  #223-D: function "esp_at_sntp_init" declared implicitly
+  	if (!esp_at_sntp_init())
+..\app\main.c(45): warning:  #546-D: transfer of control bypasses initialization of:
+            variable "info"  (declared at line 73)
+            variable "weather"  (declared at line 74)
+          goto err;		
+          ^
+..\app\main.c(51): warning:  #546-D: transfer of control bypasses initialization of:
+            variable "info"  (declared at line 73)
+            variable "weather"  (declared at line 74)
+          goto err;		
+          ^
+..\app\main.c(57): warning:  #546-D: transfer of control bypasses initialization of:
+            variable "info"  (declared at line 73)
+            variable "weather"  (declared at line 74)
+          goto err;		
+          ^
+..\app\main.c(63): warning:  #546-D: transfer of control bypasses initialization of:
+            variable "info"  (declared at line 73)
+            variable "weather"  (declared at line 74)
+          goto err;		
+          ^
+..\app\main.c(70): warning:  #546-D: transfer of control bypasses initialization of:
+            variable "info"  (declared at line 73)
+            variable "weather"  (declared at line 74)
+          goto err;
+          ^
+..\app\main.c(151): warning:  #1-D: last line of file ends without a newline
+  	// st7789_draw_image(0,80,&font_image);
+..\app\main.c(18): warning:  #177-D: function "wait_release"  was declared but never referenced
+  static void wait_release(void)
+..\app\main.c(24): warning:  #177-D: function "key_press"  was declared but never referenced
+  static bool key_press(void)
+..\app\main.c: 21 warnings, 0 errors
 linking...
-Program Size: Code=12402 RO-data=124726 RW-data=52 ZI-data=2148  
-".\Objects\stm32f407.axf" - 0 Error(s), 1 Warning(s).
+Program Size: Code=18584 RO-data=1172 RW-data=60 ZI-data=3684  
+".\Objects\stm32f407.axf" - 0 Error(s), 36 Warning(s).
 
 <h2>Software Packages used:</h2>
 
