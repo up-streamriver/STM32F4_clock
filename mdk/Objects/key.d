@@ -39,5 +39,5 @@
 .\objects\key.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
 .\objects\key.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\string.h
 .\objects\key.o: ..\driver\led\led.h
-.\objects\key.o: ..\app\usart.h
+.\objects\key.o: ..\app\usart\usart.h
 .\objects\key.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h

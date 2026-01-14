@@ -1,5 +1,5 @@
-.\objects\weather.o: ..\app\weather.c
-.\objects\weather.o: ..\app\weather.h
+.\objects\weather.o: ..\app\weather\weather.c
+.\objects\weather.o: ..\app\weather\weather.h
 .\objects\weather.o: ..\firmware\cmsis\device\stm32f4xx.h
 .\objects\weather.o: ..\firmware\cmsis\core\core_cm4.h
 .\objects\weather.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h
@@ -40,3 +40,5 @@
 .\objects\weather.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\string.h
 .\objects\weather.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
 .\objects\weather.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdlib.h
+.\objects\weather.o: ..\driver\esp_at\esp_at.h
+.\objects\weather.o: ..\app\usart\usart.h

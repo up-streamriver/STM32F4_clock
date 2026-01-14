@@ -1,5 +1,5 @@
-.\objects\board.o: ..\app\board.c
-.\objects\board.o: ..\app\board.h
+.\objects\board.o: ..\app\board\board.c
+.\objects\board.o: ..\app\board\board.h
 .\objects\board.o: ..\firmware\cmsis\device\stm32f4xx.h
 .\objects\board.o: ..\firmware\cmsis\core\core_cm4.h
 .\objects\board.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h
@@ -38,7 +38,7 @@
 .\objects\board.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdio.h
 .\objects\board.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
 .\objects\board.o: ..\driver\led\led.h
-.\objects\board.o: ..\app\usart.h
+.\objects\board.o: ..\app\usart\usart.h
 .\objects\board.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\string.h
 .\objects\board.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
 .\objects\board.o: ..\component\ringbuffer\ringbuffer.h
@@ -49,5 +49,6 @@
 .\objects\board.o: ..\app\font\font.h
 .\objects\board.o: ..\app\font\image.h
 .\objects\board.o: ..\driver\esp_at\esp_at.h
-.\objects\board.o: ..\app\weather.h
+.\objects\board.o: ..\app\weather\weather.h
 .\objects\board.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdlib.h
+.\objects\board.o: ..\app\wifi\wifi.h

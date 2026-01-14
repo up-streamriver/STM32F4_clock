@@ -12,6 +12,7 @@
 #include "st7789.h"
 #include "esp_at.h"
 #include "weather.h"
+#include "wifi.h"
 
 
 void board_init(void);

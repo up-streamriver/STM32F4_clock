@@ -1,4 +1,4 @@
-.\objects\uitls.o: ..\app\uitls.c
+.\objects\uitls.o: ..\app\board\uitls.c
 .\objects\uitls.o: ..\firmware\cmsis\device\stm32f4xx.h
 .\objects\uitls.o: ..\firmware\cmsis\core\core_cm4.h
 .\objects\uitls.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h

@@ -8,7 +8,7 @@ static uint8_t usart_rx_buffer[USART_RX_BUFFER_SIZE];
 static ringbuffer_t serial_rb;
 
 
-static const char *url = "https://api.seniverse.com/v3/weather/now.json?key=St0LIXsCn7a-r05vm&location=beijing&language=en&unit=c";
+
 
 void usart_recv_handler(uint8_t data)
 {
@@ -38,32 +38,13 @@ int main(void)
 	serial_rb = rb8_new(usart_rx_buffer,USART_RX_BUFFER_SIZE);
 	usart_recv_handler_register(usart_recv_handler);
 	usart_init();
-	esp_wifi_info_t wifi = { 0 };
-	esp_sntp_info_t date = { 0 };
-	weather_info_t weather = { 0 };
-	if(!esp_at_init())
-	{
-        usart_printf("[AT] init failed\n");
-        goto err;		
-	}
-	usart_printf("[AT] init success\n");
-	if(!esp_at_wifi_init())
-	{
-        usart_printf("[WIFI] init failed\n");
-        goto err;		
-	}
-	usart_printf("[WIFI] init success\n");
 
-	if (!esp_at_sntp_init())
-    {
-        usart_printf("[SNTP] init failed\n");
-        goto err;
-    }
-    usart_printf("[SNTP] inited success\n");
-	
 	
 
-
+	
+	wifi_init();
+	wifi_wait_connect();
+	weather_wait_get();
 	//usart_printf("info:%s\n",info);
 	//key_init();
 	//st7789_init();
@@ -72,50 +53,9 @@ int main(void)
 	// usart_printf("measure failed\r\n");
 	while(1)
 	{
-	if(!esp_at_connect_wifi("river", "12345678", NULL))
-	{
-        usart_printf("[WIFI] connect failed\n");
-        continue;	
+		
 	}
-	usart_printf("[WIFI] connect success\n");
-	if(!wifi_is_connected())
-	{
-        usart_printf("[WIFI] disconnect \n");
-        continue;			
-	}
-	if(!esp_at_get_wifi_info(&wifi))
-	{
-        usart_printf("[WIFI] info failed\n");
-        continue;		
-	}
-	usart_printf("[WIFI] ssid:%s  bssid:%s  channel:%d  rssi:%d\n",wifi.ssid,wifi.bssid,wifi.channel,wifi.rssi);	
-	if(!esp_at_sntp_get(&date))
-	{
-        usart_printf("[SNTP] info failed\n");
-        continue;			
-	}
-	usart_printf("[SNTP] %d,%d,%d,%d,%d,%d,%s\n",date.year,date.month,date.day,date.hour,date.minute,date.second,
-	date.weekday == 1 ? "Monday":
-	date.weekday == 2 ? "Tuesday":
-	date.weekday == 3 ? "Wednesday":
-	date.weekday == 4 ? "Thursday":
-	date.weekday == 5 ? "Friday":
-	date.weekday == 6 ? "Saturday":
-	date.weekday == 7 ? "Sunday": "Unknown");
-	const char *info = 	esp_at_http_get(url);
-	if(!parse_seniverse_response(info,&weather))
-	{
-		usart_printf("[WEATHER] info falied\n");
-		continue;		
-	}
-	usart_printf("[WEATHER] %s,%s,%s,%1.f\n",weather.city,weather.location,weather.weather,weather.temperature);
-	}
-err:
-    while (1)
-    {
-        usart_printf("AT Error\r\n");
-        delay_us(1000 * 1000);
-    }	
+
     
 
 

@@ -1,5 +1,5 @@
-.\objects\usart.o: ..\app\usart.c
-.\objects\usart.o: ..\app\usart.h
+.\objects\usart.o: ..\app\usart\usart.c
+.\objects\usart.o: ..\app\usart\usart.h
 .\objects\usart.o: ..\firmware\cmsis\device\stm32f4xx.h
 .\objects\usart.o: ..\firmware\cmsis\core\core_cm4.h
 .\objects\usart.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h
