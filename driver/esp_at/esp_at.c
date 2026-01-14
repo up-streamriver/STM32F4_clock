@@ -11,7 +11,7 @@ MCU WAKE ESP PA4
 #define USART2_TX_PIN GPIO_Pin_2
 #define USART2_RX_PIN GPIO_Pin_3
 
-#define ESP_AT_DEBUG 1
+//#define ESP_AT_DEBUG 1
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 
@@ -257,6 +257,56 @@ bool esp_at_sntp_init(void)
     return true;    
 }
 
+static int weekday_to_num(const char * weekday_str)
+{
+    const char *weekday_list[] = {"Mon","Tue","Wed","Thu","Fri","Sat","Sun"};
+    for(uint8_t i=0;i<7;i++)
+    {
+        if(strcmp(weekday_list[i],weekday_str) == 0)
+        {
+            return i+1;
+        }
+    }
+    return 0;
+}
+
+static int month_to_num(const char * month_str)
+{
+    const char *month_list[] = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+    for(uint8_t i=0;i<12;i++)
+    {
+        if(strcmp(month_list[i],month_str) == 0)
+        {
+            return i+1;
+        }
+    }
+    return 0;
+}
+
+
+static bool parse_cipsntptime_response(const char *response,esp_sntp_info_t *info)
+{
+//AT+CIPSNTPTIME?
+//+CIPSNTPTIME:Mon Oct 18 20:12:27 2021
+//OK
+    char month_str[4];
+    char weekday_str[4];
+    response = strstr(response,"+CIPSNTPTIME:");
+    if(sscanf(response,"+CIPSNTPTIME:%3s %3s %hhu %hhu:%hhu:%hhu %hu",weekday_str,month_str,&info->day,&info->hour,&info->minute,&info->second,&info->year) != 7)
+        return false;
+    info->month = month_to_num(month_str);
+    info->weekday = weekday_to_num(weekday_str);
+    return true;
+}
+
+bool esp_at_sntp_get(esp_sntp_info_t *date)
+{
+    if (!esp_usart_write_command("AT+CIPSNTPTIME?", 2000))
+        return false;
+    if(!parse_cipsntptime_response(esp_at_get_response(),date))
+        return false;
+    return true;     
+}
 
 const char *esp_at_http_get(const char *url)
 {
@@ -264,8 +314,6 @@ const char *esp_at_http_get(const char *url)
 //    +HTTPCLIENT:261,{"results":[{"location":{"id":"WTEMH46Z5N09","name":"Hefei","country":"CN","path":"Hefei,Hefei,Anhui,China","timezone":"Asia/Shanghai","timezone_offset":"+08:00"},"now":{"text":"Cloudy","code":"4","temperature":"32"},"last_update":"2025-07-26T16:30:00+08:00"}]}
 
 //    OK
-    
-    usart_printf("string: %s\n",url);
     char *txbuf = rxbuf;
     snprintf(txbuf,sizeof(rxbuf),"AT+HTTPCLIENT=2,1,\"%s\",,,2",url);
     bool ret = esp_usart_write_command(txbuf,5000);

@@ -1,6 +1,6 @@
 Dependencies for Project 'stm32f407', Target 'stm32f407': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCOMPLIER506
-F (..\app\main.c)(0x6966622F)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver -I ..\app -I ..\component\ringbuffer -I ..\app\font -I ..\driver\led -I ..\driver\key -I ..\driver\st7789 -I ..\driver\timer -I ..\driver\esp_at-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (..\app\main.c)(0x69670EA0)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver -I ..\app -I ..\component\ringbuffer -I ..\app\font -I ..\driver\led -I ..\driver\key -I ..\driver\st7789 -I ..\driver\timer -I ..\driver\esp_at-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (..\app\board.h)(0x6966618E)
 I (..\firmware\cmsis\device\stm32f4xx.h)(0x67F66F08)
 I (..\firmware\cmsis\core\core_cm4.h)(0x67F66B72)
@@ -49,7 +49,7 @@ I (..\driver\st7789\st7789.h)(0x69659C1A)
 I (F:\Keil_v5\ARM\ARMCOMPLIER506\include\stddef.h)(0x5E8E3CC2)
 I (..\app\font\font.h)(0x69659ABC)
 I (..\app\font\image.h)(0x69659D4E)
-I (..\driver\esp_at\esp_at.h)(0x69665AD9)
+I (..\driver\esp_at\esp_at.h)(0x69670CDE)
 I (..\app\weather.h)(0x696665F2)
 I (F:\Keil_v5\ARM\ARMCOMPLIER506\include\stdlib.h)(0x5E8E3CC2)
 F (..\app\board.c)(0x6965E6A1)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver -I ..\app -I ..\component\ringbuffer -I ..\app\font -I ..\driver\led -I ..\driver\key -I ..\driver\st7789 -I ..\driver\timer -I ..\driver\esp_at-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\board.o --omf_browse .\objects\board.crf --depend .\objects\board.d)
@@ -101,7 +101,7 @@ I (..\driver\st7789\st7789.h)(0x69659C1A)
 I (F:\Keil_v5\ARM\ARMCOMPLIER506\include\stddef.h)(0x5E8E3CC2)
 I (..\app\font\font.h)(0x69659ABC)
 I (..\app\font\image.h)(0x69659D4E)
-I (..\driver\esp_at\esp_at.h)(0x69665AD9)
+I (..\driver\esp_at\esp_at.h)(0x69670CDE)
 I (..\app\weather.h)(0x696665F2)
 I (F:\Keil_v5\ARM\ARMCOMPLIER506\include\stdlib.h)(0x5E8E3CC2)
 F (..\app\uitls.c)(0x6965C65A)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver -I ..\app -I ..\component\ringbuffer -I ..\app\font -I ..\driver\led -I ..\driver\key -I ..\driver\st7789 -I ..\driver\timer -I ..\driver\esp_at-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\uitls.o --omf_browse .\objects\uitls.crf --depend .\objects\uitls.d)
@@ -547,8 +547,8 @@ I (F:\Keil_v5\ARM\ARMCOMPLIER506\include\string.h)(0x5E8E3CC2)
 I (..\driver\led\led.h)(0x6961CEA8)
 I (..\app\usart.h)(0x6961BF50)
 I (F:\Keil_v5\ARM\ARMCOMPLIER506\include\stdarg.h)(0x5E8E3CC2)
-F (..\driver\esp_at\esp_at.c)(0x69665AD3)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver -I ..\app -I ..\component\ringbuffer -I ..\app\font -I ..\driver\led -I ..\driver\key -I ..\driver\st7789 -I ..\driver\timer -I ..\driver\esp_at-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\esp_at.o --omf_browse .\objects\esp_at.crf --depend .\objects\esp_at.d)
-I (..\driver\esp_at\esp_at.h)(0x69665AD9)
+F (..\driver\esp_at\esp_at.c)(0x69670F3F)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver -I ..\app -I ..\component\ringbuffer -I ..\app\font -I ..\driver\led -I ..\driver\key -I ..\driver\st7789 -I ..\driver\timer -I ..\driver\esp_at-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\esp_at.o --omf_browse .\objects\esp_at.crf --depend .\objects\esp_at.d)
+I (..\driver\esp_at\esp_at.h)(0x69670CDE)
 I (..\firmware\cmsis\device\stm32f4xx.h)(0x67F66F08)
 I (..\firmware\cmsis\core\core_cm4.h)(0x67F66B72)
 I (F:\Keil_v5\ARM\ARMCOMPLIER506\include\stdint.h)(0x5E8E3CC2)
