@@ -42,8 +42,6 @@ static const at_ack_match_t at_ack_matches[]=
 
 static char rxbuf[1024];
 
-extern uint64_t bl_now_ms(void);
-
 static void esp_at_usart_write(const char *data);
 
 static void esp_at_usart_init(void)
@@ -71,31 +69,31 @@ static void esp_at_usart_init(void)
     USART_Cmd(USART2,ENABLE);    
 }
 
+static bool esp_at_wait_boot(uint32_t timeout)
+{
+    for (int t = 0; t < timeout; t += 100)
+    {
+        if (esp_usart_write_command("AT", 100))
+            return true;
+    }
+    
+    return false;
+}
+
 bool esp_at_init(void)
 {
     esp_at_usart_init();
-    esp_usart_write_command("AT",100);
-    if(!esp_usart_write_command("AT",100))
-    {   
-        usart_printf("AT OK ERROR\n");
+    
+    
+    if (!esp_at_wait_boot(3000))
         return false;
-    }
-
-    if(!esp_usart_write_command("AT+RESTORE",2000))
-    {   
-        usart_printf("AT RESTORE ERROR\n");
-        return false;    
-    }        
-    if(!esp_at_wait_ready(5000))
-    {   
-        usart_printf("AT READY ERROR\n");
-        return false;  
-    }
-    usart_printf("AT READY\n");
+    if (!esp_usart_write_command("AT+RESTORE", 2000))
+        return false;
+    if (!esp_at_wait_ready(5000))
+        return false;
+    
     return true;
 }
-
-
 
 static void esp_at_usart_write(const char *data)
 {
@@ -126,13 +124,13 @@ static at_ack_t esp_at_usart_wait_receive(uint32_t timeout)
 {   
     const char * line = rxbuf;
     uint32_t rxlen = 0;
-    uint64_t start = bl_now_ms();
+    uint64_t start = cpu_get_ms();
     rxbuf[0] = '\0';
     while(rxlen < sizeof(rxbuf) - 1)
     {
         while(USART_GetFlagStatus(USART2,USART_FLAG_RXNE) == RESET)
         {
-            if(bl_now_ms() - start >= timeout)
+            if(cpu_get_ms() - start >= timeout)
                 return AT_ACK_NONE;
         }
         rxbuf[rxlen++] = USART_ReceiveData(USART2);

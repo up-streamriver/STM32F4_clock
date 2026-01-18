@@ -8,6 +8,7 @@
 #include <stdarg.h>
 #include "usart.h"
 #include <stdint.h>
+#include "cpu_tick.h"
 
 typedef struct 
 {

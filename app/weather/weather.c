@@ -1,7 +1,8 @@
 #include "weather.h"
+#include "app.h"
 static weather_info_t weather = { 0 };
-static const char *url = "https://api.seniverse.com/v3/weather/now.json?key=St0LIXsCn7a-r05vm&location=beijing&language=en&unit=c";
-extern void delay_us(uint64_t us);
+
+
 
 bool parse_seniverse_response(const char *response,weather_info_t *info)
 {
@@ -44,21 +45,4 @@ bool parse_seniverse_response(const char *response,weather_info_t *info)
        } 
     }          
     return true;
-}
-
-void weather_wait_get(void)
-{
-    for(uint16_t i=0;i<500;i++)
-    {   
-        delay_us(1000 * 10);
-        const char *info = 	esp_at_http_get(url);
-	    if(!parse_seniverse_response(info,&weather))
-	    {
-	    	usart_printf("[WEATHER] info falied\n");
-	    	continue;		
-	    }
-	    usart_printf("[WEATHER] %s,%s,%s,%1.f\n",weather.city,weather.location,weather.weather,weather.temperature);
-        return;
-    }
-    return;
 }

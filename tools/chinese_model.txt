@@ -1,0 +1,5 @@
+static const font_chinese_t chinese_model[] =
+{
+    {}
+};
+

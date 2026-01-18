@@ -8,6 +8,7 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include "esp_at.h"
+#include "cpu_tick.h"
 
 typedef struct 
 {
@@ -19,7 +20,7 @@ typedef struct
 }weather_info_t;
 
 bool parse_seniverse_response(const char *response,weather_info_t *info);
-void weather_wait_get(void);
+
 
 #endif
 /*WEATHER_H */

@@ -41,3 +41,5 @@
 .\objects\wifi.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\string.h
 .\objects\wifi.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
 .\objects\wifi.o: ..\driver\esp_at\esp_at.h
+.\objects\wifi.o: ..\driver\cpu_tick\cpu_tick.h
+.\objects\wifi.o: ..\app\app.h

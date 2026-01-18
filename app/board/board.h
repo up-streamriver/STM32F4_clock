@@ -13,13 +13,15 @@
 #include "esp_at.h"
 #include "weather.h"
 #include "wifi.h"
+#include "page.h"
+#include "rtc.h"
+#include "aht20.h"
 
 
+void board_lowlevel_init(void);
 void board_init(void);
-void delay_init(void);
-void delay_us(uint64_t us);
-uint64_t bl_now_us(void);
-uint64_t bl_now_ms(void);
+
+ 
 
 #endif
 /*BOARD_H */

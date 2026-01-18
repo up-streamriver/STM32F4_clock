@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER,HSE_VALUE=8000000</Define>
               <Undefine></Undefine>
-              <IncludePath>..\firmware\cmsis\core;..\firmware\cmsis\device;..\firmware\driver\inc;..\driver;..\app;..\component\ringbuffer;..\app\font;..\driver\led;..\driver\key;..\driver\st7789;..\driver\timer;..\driver\esp_at;..\app\wifi;..\app\board;..\app\usart;..\app\weather</IncludePath>
+              <IncludePath>..\firmware\cmsis\core;..\firmware\cmsis\device;..\firmware\driver\inc;..\driver;..\app;..\component\ringbuffer;..\app\font;..\driver\led;..\driver\key;..\driver\st7789;..\driver\timer;..\driver\esp_at;..\app\wifi;..\app\board;..\app\usart;..\app\weather;..\app\image;..\driver\cpu_tick;..\app\page;..\driver\rtc;..\driver\aht20</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -390,30 +390,155 @@
               <FileType>1</FileType>
               <FilePath>..\app\main.c</FilePath>
             </File>
+            <File>
+              <FileName>mloop.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\mloop.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>app/font</GroupName>
           <Files>
             <File>
-              <FileName>font16.c</FileName>
+              <FileName>font16_maple.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\app\font\font16.c</FilePath>
+              <FilePath>..\app\font\font16_maple.c</FilePath>
             </File>
             <File>
-              <FileName>font32.c</FileName>
+              <FileName>font20_maple_bold.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\app\font\font32.c</FilePath>
+              <FilePath>..\app\font\font20_maple_bold.c</FilePath>
             </File>
             <File>
-              <FileName>font48.c</FileName>
+              <FileName>font24_maple_bold.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\app\font\font48.c</FilePath>
+              <FilePath>..\app\font\font24_maple_bold.c</FilePath>
             </File>
             <File>
-              <FileName>image_tv.c</FileName>
+              <FileName>font24_maple_semibold.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\app\font\image_tv.c</FilePath>
+              <FilePath>..\app\font\font24_maple_semibold.c</FilePath>
+            </File>
+            <File>
+              <FileName>font32_maple_bold.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\font\font32_maple_bold.c</FilePath>
+            </File>
+            <File>
+              <FileName>font54_maple_bold.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\font\font54_maple_bold.c</FilePath>
+            </File>
+            <File>
+              <FileName>font54_maple_semibold.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\font\font54_maple_semibold.c</FilePath>
+            </File>
+            <File>
+              <FileName>font64_maple_extrabold.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\font\font64_maple_extrabold.c</FilePath>
+            </File>
+            <File>
+              <FileName>font76_maple_extrabold.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\font\font76_maple_extrabold.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>app/image</GroupName>
+          <Files>
+            <File>
+              <FileName>icon_duoyun.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\image\icon_duoyun.c</FilePath>
+            </File>
+            <File>
+              <FileName>icon_leizhenyu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\image\icon_leizhenyu.c</FilePath>
+            </File>
+            <File>
+              <FileName>icon_na.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\image\icon_na.c</FilePath>
+            </File>
+            <File>
+              <FileName>icon_qing.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\image\icon_qing.c</FilePath>
+            </File>
+            <File>
+              <FileName>icon_wenduji.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\image\icon_wenduji.c</FilePath>
+            </File>
+            <File>
+              <FileName>icon_wifi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\image\icon_wifi.c</FilePath>
+            </File>
+            <File>
+              <FileName>icon_yintian.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\image\icon_yintian.c</FilePath>
+            </File>
+            <File>
+              <FileName>icon_yueliang.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\image\icon_yueliang.c</FilePath>
+            </File>
+            <File>
+              <FileName>icon_zhongxue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\image\icon_zhongxue.c</FilePath>
+            </File>
+            <File>
+              <FileName>icon_zhongyu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\image\icon_zhongyu.c</FilePath>
+            </File>
+            <File>
+              <FileName>img_error.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\image\img_error.c</FilePath>
+            </File>
+            <File>
+              <FileName>img_meihua.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\image\img_meihua.c</FilePath>
+            </File>
+            <File>
+              <FileName>img_wifi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\image\img_wifi.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>app/page</GroupName>
+          <Files>
+            <File>
+              <FileName>error_page.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\page\error_page.c</FilePath>
+            </File>
+            <File>
+              <FileName>main_page.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\page\main_page.c</FilePath>
+            </File>
+            <File>
+              <FileName>welcome_page.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\page\welcome_page.c</FilePath>
+            </File>
+            <File>
+              <FileName>wifi_page.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\page\wifi_page.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -424,11 +549,6 @@
               <FileName>board.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\app\board\board.c</FilePath>
-            </File>
-            <File>
-              <FileName>uitls.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\app\board\uitls.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -512,6 +632,36 @@
               <FileName>esp_at.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\driver\esp_at\esp_at.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>driver/cpu_tick</GroupName>
+          <Files>
+            <File>
+              <FileName>cpu_tick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\driver\cpu_tick\cpu_tick.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>driver/rtc</GroupName>
+          <Files>
+            <File>
+              <FileName>rtc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\driver\rtc\rtc.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>driver/aht20</GroupName>
+          <Files>
+            <File>
+              <FileName>aht20.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\driver\aht20\aht20.c</FilePath>
             </File>
           </Files>
         </Group>

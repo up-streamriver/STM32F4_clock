@@ -1,6 +1,6 @@
 #include "board.h"
 
-void board_init(void)
+void board_lowlevel_init(void)
 {
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB,ENABLE);
@@ -14,4 +14,23 @@ void board_init(void)
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6,ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C2,ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
+    PWR_BackupAccessCmd(ENABLE);
+    RCC_LSEConfig(RCC_LSE_ON);
+    while(RCC_GetFlagStatus(RCC_FLAG_LSERDY) == RESET);
+    RCC_RTCCLKConfig(RCC_RTCCLKSource_LSE);
 }
+
+void board_init(void)
+{
+    cpu_tick_init();
+    usart_init();
+    usart_printf("[SYS] Build Date: %s %s\n", __DATE__, __TIME__);
+    
+    rtc_init();
+    aht20_init();
+    st7789_init();
+    
+}
+
+

@@ -1,8 +1,8 @@
-.\objects\aht20.o: ..\driver\aht20.c
-.\objects\aht20.o: ..\driver\aht20.h
+.\objects\aht20.o: ..\driver\aht20\aht20.c
+.\objects\aht20.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
+.\objects\aht20.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h
 .\objects\aht20.o: ..\firmware\cmsis\device\stm32f4xx.h
 .\objects\aht20.o: ..\firmware\cmsis\core\core_cm4.h
-.\objects\aht20.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h
 .\objects\aht20.o: ..\firmware\cmsis\core\core_cmInstr.h
 .\objects\aht20.o: ..\firmware\cmsis\core\core_cmFunc.h
 .\objects\aht20.o: ..\firmware\cmsis\core\core_cmSimd.h
@@ -35,4 +35,4 @@
 .\objects\aht20.o: ..\firmware\driver\inc\stm32f4xx_dac.h
 .\objects\aht20.o: ..\firmware\driver\inc\stm32f4xx_dcmi.h
 .\objects\aht20.o: ..\firmware\driver\inc\stm32f4xx_fsmc.h
-.\objects\aht20.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
+.\objects\aht20.o: ..\driver\cpu_tick\cpu_tick.h

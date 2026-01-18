@@ -22,10 +22,6 @@ LCD_LED PE5
 #define LED_PORT GPIOE
 #define LED_PIN GPIO_Pin_5
 
-extern void delay_us(uint32_t us);
-
-#define spi_delay_us(x) delay_us(x)
-#define spi_delay_ms(x) delay_us((x) * 1000)
 
 static void st7789_init_display(void);
 
@@ -93,9 +89,9 @@ static void st7789_write_register(uint8_t reg,uint8_t data[],uint16_t length)
 static void st7789_reset(void)
 {
     GPIO_ResetBits(RESET_PORT,RESET_PIN);
-    spi_delay_us(20);
+    cpu_delay_us(20);
     GPIO_SetBits(RESET_PORT, RESET_PIN);
-    spi_delay_ms(120);
+    cpu_delay_ms(120);
 }
 
 static void st7789_set_backlight(bool on)
@@ -110,7 +106,7 @@ static void st7789_init_display(void)
     
     st7789_write_register(0x11,NULL,0); //sleep out
 
-    spi_delay_ms(5);
+    cpu_delay_ms(5);
 
     st7789_write_register(0x36,(uint8_t[]){0x00},1); //Memory Data Access Control 基本显示配置
     st7789_write_register(0x3A,(uint8_t[]){0x55},1); //设置颜色格式rgb565
@@ -303,7 +299,7 @@ void st7789_write_string(uint16_t x, uint16_t y, char *str, uint16_t color, uint
     }
 }
 
-void st7789_draw_image(uint16_t x, uint16_t y,const font_image_t *font_image)
+void st7789_draw_image(uint16_t x, uint16_t y,const image_t *font_image)
 {
     uint16_t height = font_image ->height;
     uint16_t width = font_image ->width;
@@ -318,7 +314,7 @@ void st7789_draw_image(uint16_t x, uint16_t y,const font_image_t *font_image)
     GPIO_SetBits(DC_PORT, DC_PIN);
 
     uint32_t length = height * width * 2;
-    uint8_t * data = font_image ->image_model;
+    uint8_t * data = font_image ->data;
     for(uint32_t i=0;i < length; i += 2)
     {
         SPI_SendData(SPI2, data[i+1]);

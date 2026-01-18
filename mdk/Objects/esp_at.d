@@ -40,3 +40,4 @@
 .\objects\esp_at.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\string.h
 .\objects\esp_at.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
 .\objects\esp_at.o: ..\app\usart\usart.h
+.\objects\esp_at.o: ..\driver\cpu_tick\cpu_tick.h

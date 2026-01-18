@@ -1,12 +1,11 @@
 #include "wifi.h"
+#include "app.h"
 
 static	esp_wifi_info_t wifi = { 0 };
 static	esp_sntp_info_t date = { 0 };
 
-static const *wifi_ssid = "river";
-static const *wifi_pwd = "12345678";
 
-extern void delay_us(uint64_t us);
+
 
 void wifi_init(void)
 {
@@ -34,7 +33,7 @@ err:
     while (1)
     {
         usart_printf("AT Error\r\n");
-        delay_us(1000 * 1000);
+        cpu_delay_us(1000 * 1000);
     }		
 }
 
@@ -43,7 +42,7 @@ void wifi_wait_connect(void)
     
     for(uint16_t i=0 ; i<500 ; i++)
     {   
-        delay_us(1000 *10);
+        cpu_delay_us(1000 *10);
         if(!esp_at_connect_wifi(wifi_ssid, wifi_pwd, NULL))
 	    {
             usart_printf("[WIFI] connect failed\n");

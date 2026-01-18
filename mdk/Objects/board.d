@@ -47,8 +47,12 @@
 .\objects\board.o: ..\driver\st7789\st7789.h
 .\objects\board.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
 .\objects\board.o: ..\app\font\font.h
-.\objects\board.o: ..\app\font\image.h
+.\objects\board.o: ..\app\image\image.h
+.\objects\board.o: ..\driver\cpu_tick\cpu_tick.h
 .\objects\board.o: ..\driver\esp_at\esp_at.h
 .\objects\board.o: ..\app\weather\weather.h
 .\objects\board.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdlib.h
 .\objects\board.o: ..\app\wifi\wifi.h
+.\objects\board.o: ..\app\page\page.h
+.\objects\board.o: ..\driver\rtc\rtc.h
+.\objects\board.o: ..\driver\aht20\aht20.h

@@ -1,5 +1,5 @@
-.\objects\image_tv.o: ..\app\font\image_tv.c
-.\objects\image_tv.o: ..\app\font\image.h
+.\objects\image_tv.o: ..\app\image\image_tv.c
+.\objects\image_tv.o: ..\app\image\image.h
 .\objects\image_tv.o: ..\firmware\cmsis\device\stm32f4xx.h
 .\objects\image_tv.o: ..\firmware\cmsis\core\core_cm4.h
 .\objects\image_tv.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h
