@@ -1,6 +1,6 @@
 Dependencies for Project 'stm32f407', Target 'stm32f407': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCOMPLIER506
-F (..\app\main.c)(0x696CDE84)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver -I ..\app -I ..\component\ringbuffer -I ..\app\font -I ..\driver\led -I ..\driver\key -I ..\driver\st7789 -I ..\driver\timer -I ..\driver\esp_at -I ..\app\wifi -I ..\app\board -I ..\app\usart -I ..\app\weather -I ..\app\image -I ..\driver\cpu_tick -I ..\app\page -I ..\driver\rtc -I ..\driver\aht20-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (..\app\main.c)(0x696F4767)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver -I ..\app -I ..\component\ringbuffer -I ..\app\font -I ..\driver\led -I ..\driver\key -I ..\driver\st7789 -I ..\driver\timer -I ..\driver\esp_at -I ..\app\wifi -I ..\app\board -I ..\app\usart -I ..\app\weather -I ..\app\image -I ..\driver\cpu_tick -I ..\app\page -I ..\driver\rtc -I ..\driver\aht20-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (..\app\page\page.h)(0x6968512C)
 I (..\driver\st7789\st7789.h)(0x69685226)
 I (..\firmware\cmsis\device\stm32f4xx.h)(0x67F66F08)
@@ -1159,7 +1159,7 @@ I (F:\Keil_v5\ARM\ARMCOMPLIER506\include\stdarg.h)(0x5E8E3CC2)
 I (..\app\image\image.h)(0x69684F13)
 I (..\driver\cpu_tick\cpu_tick.h)(0x688D1C76)
 I (..\app\app.h)(0x696858BE)
-F (..\app\board\board.c)(0x696B3157)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver -I ..\app -I ..\component\ringbuffer -I ..\app\font -I ..\driver\led -I ..\driver\key -I ..\driver\st7789 -I ..\driver\timer -I ..\driver\esp_at -I ..\app\wifi -I ..\app\board -I ..\app\usart -I ..\app\weather -I ..\app\image -I ..\driver\cpu_tick -I ..\app\page -I ..\driver\rtc -I ..\driver\aht20-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\board.o --omf_browse .\objects\board.crf --depend .\objects\board.d)
+F (..\app\board\board.c)(0x696F4238)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver -I ..\app -I ..\component\ringbuffer -I ..\app\font -I ..\driver\led -I ..\driver\key -I ..\driver\st7789 -I ..\driver\timer -I ..\driver\esp_at -I ..\app\wifi -I ..\app\board -I ..\app\usart -I ..\app\weather -I ..\app\image -I ..\driver\cpu_tick -I ..\app\page -I ..\driver\rtc -I ..\driver\aht20-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\board.o --omf_browse .\objects\board.crf --depend .\objects\board.d)
 I (..\app\board\board.h)(0x6968638C)
 I (..\firmware\cmsis\device\stm32f4xx.h)(0x67F66F08)
 I (..\firmware\cmsis\core\core_cm4.h)(0x67F66B72)
@@ -1425,7 +1425,7 @@ I (F:\Keil_v5\ARM\ARMCOMPLIER506\include\string.h)(0x5E8E3CC2)
 I (..\driver\led\led.h)(0x6961CEA8)
 I (..\app\usart\usart.h)(0x6961BF50)
 I (F:\Keil_v5\ARM\ARMCOMPLIER506\include\stdarg.h)(0x5E8E3CC2)
-F (..\driver\st7789\st7789.c)(0x6968524D)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver -I ..\app -I ..\component\ringbuffer -I ..\app\font -I ..\driver\led -I ..\driver\key -I ..\driver\st7789 -I ..\driver\timer -I ..\driver\esp_at -I ..\app\wifi -I ..\app\board -I ..\app\usart -I ..\app\weather -I ..\app\image -I ..\driver\cpu_tick -I ..\app\page -I ..\driver\rtc -I ..\driver\aht20-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\st7789.o --omf_browse .\objects\st7789.crf --depend .\objects\st7789.d)
+F (..\driver\st7789\st7789.c)(0x696F4758)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -g -O1 --apcs=interwork --split_sections -I ..\firmware\cmsis\core -I ..\firmware\cmsis\device -I ..\firmware\driver\inc -I ..\driver -I ..\app -I ..\component\ringbuffer -I ..\app\font -I ..\driver\led -I ..\driver\key -I ..\driver\st7789 -I ..\driver\timer -I ..\driver\esp_at -I ..\app\wifi -I ..\app\board -I ..\app\usart -I ..\app\weather -I ..\app\image -I ..\driver\cpu_tick -I ..\app\page -I ..\driver\rtc -I ..\driver\aht20-D__UVISION_VERSION="542" -DSTM32F407xx -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DHSE_VALUE="8000000"-o .\objects\st7789.o --omf_browse .\objects\st7789.crf --depend .\objects\st7789.d)
 I (..\driver\st7789\st7789.h)(0x69685226)
 I (..\firmware\cmsis\device\stm32f4xx.h)(0x67F66F08)
 I (..\firmware\cmsis\core\core_cm4.h)(0x67F66B72)

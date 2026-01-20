@@ -61,13 +61,15 @@ void st7789_init(void)
     SPI_Structure.SPI_Mode = SPI_Mode_Master;
     SPI_Structure.SPI_NSS = SPI_NSS_Soft;
     SPI_Init(SPI2,&SPI_Structure);
+    SPI_DMACmd(SPI2,SPI_I2S_DMAReq_Tx,ENABLE);
     SPI_Cmd(SPI2,ENABLE);
     
     st7789_init_display();
 }
 
 static void st7789_write_register(uint8_t reg,uint8_t data[],uint16_t length)
-{
+{   
+    SPI_DataSizeConfig(SPI2,SPI_DataSize_8b);
     GPIO_ResetBits(CS_PORT,CS_PIN);
     GPIO_ResetBits(DC_PORT,DC_PIN);
     SPI_SendData(SPI2,reg);
@@ -84,6 +86,39 @@ static void st7789_write_register(uint8_t reg,uint8_t data[],uint16_t length)
 
     GPIO_SetBits(CS_PORT,CS_PIN);
 
+}
+
+static void st7789_write_gram(uint8_t data[],uint32_t length,bool single_color)
+{   
+    SPI_DataSizeConfig(SPI2,SPI_DataSize_16b);
+    GPIO_ResetBits(CS_PORT, CS_PIN);
+    GPIO_SetBits(DC_PORT, DC_PIN);
+    length >>= 1;
+    do
+    {
+    uint32_t chunk_size = length < 65535 ? length : 65535;
+    DMA_InitTypeDef DMA_Structure;
+    DMA_StructInit(&DMA_Structure);
+    DMA_Structure.DMA_Channel = DMA_Channel_0;
+    DMA_Structure.DMA_DIR = DMA_DIR_MemoryToPeripheral;
+    DMA_Structure.DMA_FIFOMode = DMA_FIFOMode_Disable;
+    DMA_Structure.DMA_Memory0BaseAddr = (uint32_t)data; 
+    DMA_Structure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
+    DMA_Structure.DMA_MemoryInc = single_color? DMA_MemoryInc_Disable : DMA_MemoryInc_Enable;
+    DMA_Structure.DMA_Mode = DMA_Mode_Normal;
+    DMA_Structure.DMA_PeripheralBaseAddr = (uint32_t)&SPI2->DR;
+    DMA_Structure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+    DMA_Structure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+    DMA_Structure.DMA_Priority = DMA_Priority_Medium;
+    DMA_Structure.DMA_BufferSize = chunk_size;
+    DMA_Init(DMA1_Stream4,&DMA_Structure);
+    DMA_Cmd(DMA1_Stream4,ENABLE);    
+    while(DMA_GetFlagStatus(DMA1_Stream4,DMA_FLAG_TCIF4) == RESET);
+    DMA_ClearFlag(DMA1_Stream4,DMA_FLAG_TCIF4);   
+    length -= chunk_size;
+    }  while(length > 0);
+   while(SPI_GetFlagStatus(SPI2,SPI_I2S_FLAG_BSY) == SET);   
+   GPIO_SetBits(CS_PORT, CS_PIN); 
 }
 
 static void st7789_reset(void)
@@ -103,7 +138,7 @@ static void st7789_set_backlight(bool on)
 static void st7789_init_display(void)
 {
     st7789_reset();
-    
+   
     st7789_write_register(0x11,NULL,0); //sleep out
 
     cpu_delay_ms(5);
@@ -166,60 +201,29 @@ void st7789_fill_color(uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2,uint16_t 
     }
     st7789_setCursor(x1,y1,x2,y2);
     st7789_set_gram_mode();
-
-    uint8_t color_data[2] = {(uint8_t)(color>>8) & 0xFF, color & 0xFF};
     uint32_t pixels = (x2 - x1 + 1) * (y2 - y1 + 1);
-
-    GPIO_ResetBits(CS_PORT, CS_PIN);
-    GPIO_SetBits(DC_PORT, DC_PIN);
-
-    for(uint32_t i=0;i < pixels;i++)
-    {
-        SPI_SendData(SPI2, color_data[0]);
-        while(SPI_GetFlagStatus(SPI2,SPI_I2S_FLAG_TXE) == RESET);
-        SPI_SendData(SPI2, color_data[1]);
-        while(SPI_GetFlagStatus(SPI2,SPI_I2S_FLAG_TXE) == RESET);
-    }
-    while(SPI_GetFlagStatus(SPI2,SPI_I2S_FLAG_BSY) == SET);
-    GPIO_SetBits(CS_PORT, CS_PIN);
+    st7789_write_gram((uint8_t *)&color,pixels * 2,true);
 }
 
 static void st7789_draw_font(uint16_t x,uint16_t y,uint16_t width,uint16_t height,const uint8_t *model,uint16_t color,uint16_t bg_color)
 {
     uint16_t bytes_per_row = (width+7) / 8;
-    uint8_t color_data[2] = {(uint8_t)(color>>8) & 0xFF, color & 0xFF};
-    uint8_t bg_color_data[2] = {(uint8_t)(bg_color>>8) & 0xFF, bg_color & 0xFF};  
-    st7789_setCursor(x,y,x + width -1,y + height - 1);
-    st7789_set_gram_mode();  
-    
-    GPIO_ResetBits(CS_PORT, CS_PIN);
-    GPIO_SetBits(DC_PORT, DC_PIN);
-
+    static uint8_t buff[72 * 72 * 2]; 
+    uint8_t *pbuf = buff;
     for(uint16_t row=0;row < height;row++)
     {
         const uint8_t * row_data = model +  row * bytes_per_row;
         for(uint16_t column=0; column < width;column++)
         {
             uint8_t pixel = row_data[column / 8] & (1<<(7 - column % 8));
-            if(pixel)
-            {
-                SPI_SendData(SPI2, color_data[0]);
-                while (SPI_GetFlagStatus(SPI2, SPI_FLAG_TXE) == RESET);
-                SPI_SendData(SPI2, color_data[1]);
-                while (SPI_GetFlagStatus(SPI2, SPI_FLAG_TXE) == RESET);                
-            }
-            else
-            {
-                SPI_SendData(SPI2, bg_color_data[0]);
-                while (SPI_GetFlagStatus(SPI2, SPI_FLAG_TXE) == RESET);
-                SPI_SendData(SPI2, bg_color_data[1]);
-                while (SPI_GetFlagStatus(SPI2, SPI_FLAG_TXE) == RESET);                
-            }
-            
+            uint16_t color_pixel = pixel ? color : bg_color;
+            *pbuf++ = color_pixel & 0xff;
+            *pbuf++ = (color_pixel >> 8) & 0xff; 
         }       
     }
-    while (SPI_GetFlagStatus(SPI2, SPI_FLAG_BSY) != RESET);
-    GPIO_SetBits(CS_PORT, CS_PIN);   
+    st7789_setCursor(x,y,x + width -1,y + height - 1);
+    st7789_set_gram_mode();  
+    st7789_write_gram(buff,pbuf - buff,false);
 }
 
 static void st7789_write_ascii(uint16_t x,uint16_t y,char ch,uint16_t color,uint16_t bg_color,const font_t *font)
@@ -307,21 +311,9 @@ void st7789_draw_image(uint16_t x, uint16_t y,const image_t *font_image)
     {
         return;
     }
-    st7789_setCursor(x,y,x + width -1,y + height - 1);
-    st7789_set_gram_mode();  
-    
-    GPIO_ResetBits(CS_PORT, CS_PIN);
-    GPIO_SetBits(DC_PORT, DC_PIN);
-
     uint32_t length = height * width * 2;
     uint8_t * data = font_image ->data;
-    for(uint32_t i=0;i < length; i += 2)
-    {
-        SPI_SendData(SPI2, data[i+1]);
-        while (SPI_GetFlagStatus(SPI2, SPI_FLAG_TXE) == RESET);        
-        SPI_SendData(SPI2, data[i]);
-        while (SPI_GetFlagStatus(SPI2, SPI_FLAG_TXE) == RESET);                  
-    }
-    while (SPI_GetFlagStatus(SPI2, SPI_FLAG_BSY) != RESET);
-    GPIO_SetBits(CS_PORT, CS_PIN);       
+    st7789_setCursor(x,y,x + width -1,y + height - 1);
+    st7789_set_gram_mode();  
+    st7789_write_gram((uint8_t *)font_image ->data,length,false);
 }
