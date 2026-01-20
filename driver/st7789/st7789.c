@@ -25,12 +25,16 @@ LCD_LED PE5
 
 static void st7789_init_display(void);
 
-void st7789_init(void)
+static void st7789_io_init(void)
 {
+    GPIO_PinAFConfig(GPIOB,GPIO_PinSource13,GPIO_AF_SPI2);
+    GPIO_PinAFConfig(GPIOC,GPIO_PinSource2,GPIO_AF_SPI2);
+    GPIO_PinAFConfig(GPIOC,GPIO_PinSource3,GPIO_AF_SPI2);
     GPIO_InitTypeDef GPIO_Structure;
     GPIO_StructInit(&GPIO_Structure);
     GPIO_SetBits(GPIOE, CS_PIN | RESET_PIN | DC_PIN | LED_PIN);
     GPIO_ResetBits(LED_PIN, LED_PIN);
+
     GPIO_Structure.GPIO_Mode = GPIO_Mode_OUT;
     GPIO_Structure.GPIO_OType = GPIO_OType_PP;
     GPIO_Structure.GPIO_Pin = CS_PIN | RESET_PIN | DC_PIN | LED_PIN;
@@ -45,11 +49,9 @@ void st7789_init(void)
 
     GPIO_Structure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3;
     GPIO_Init(GPIOC,&GPIO_Structure);
-
-    GPIO_PinAFConfig(GPIOB,GPIO_PinSource13,GPIO_AF_SPI2);
-    GPIO_PinAFConfig(GPIOC,GPIO_PinSource2,GPIO_AF_SPI2);
-    GPIO_PinAFConfig(GPIOC,GPIO_PinSource3,GPIO_AF_SPI2);
-
+}
+static void st7789_spi_init(void)
+{
     SPI_InitTypeDef SPI_Structure;
     SPI_StructInit(&SPI_Structure);
     SPI_Structure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_4;
@@ -63,6 +65,39 @@ void st7789_init(void)
     SPI_Init(SPI2,&SPI_Structure);
     SPI_DMACmd(SPI2,SPI_I2S_DMAReq_Tx,ENABLE);
     SPI_Cmd(SPI2,ENABLE);
+}
+static void st7789_interrupt_init(void)
+{
+
+}
+
+static void st7789_dma_init(void)
+{
+
+    DMA_InitTypeDef DMA_Structure;
+    DMA_StructInit(&DMA_Structure);
+    DMA_Structure.DMA_Channel = DMA_Channel_0;
+    DMA_Structure.DMA_DIR = DMA_DIR_MemoryToPeripheral;
+    DMA_Structure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
+    DMA_Structure.DMA_Mode = DMA_Mode_Normal;
+    DMA_Structure.DMA_PeripheralBaseAddr = (uint32_t)&SPI2->DR;
+    DMA_Structure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
+    DMA_Structure.DMA_Priority = DMA_Priority_High;
+    DMA_Structure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+    DMA_Structure.DMA_FIFOMode = DMA_FIFOMode_Enable;
+    DMA_Structure.DMA_FIFOThreshold = DMA_FIFOThreshold_Full;
+    DMA_Structure.DMA_MemoryBurst = DMA_MemoryBurst_INC8;
+    DMA_Structure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
+    DMA_Init(DMA1_Stream4,&DMA_Structure);   
+}
+
+void st7789_init(void)
+{
+    st7789_spi_init();
+
+    st7789_dma_init();
+
+    st7789_io_init();
     
     st7789_init_display();
 }
@@ -97,25 +132,20 @@ static void st7789_write_gram(uint8_t data[],uint32_t length,bool single_color)
     do
     {
     uint32_t chunk_size = length < 65535 ? length : 65535;
-    DMA_InitTypeDef DMA_Structure;
-    DMA_StructInit(&DMA_Structure);
-    DMA_Structure.DMA_Channel = DMA_Channel_0;
-    DMA_Structure.DMA_DIR = DMA_DIR_MemoryToPeripheral;
-    DMA_Structure.DMA_FIFOMode = DMA_FIFOMode_Disable;
-    DMA_Structure.DMA_Memory0BaseAddr = (uint32_t)data; 
-    DMA_Structure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
-    DMA_Structure.DMA_MemoryInc = single_color? DMA_MemoryInc_Disable : DMA_MemoryInc_Enable;
-    DMA_Structure.DMA_Mode = DMA_Mode_Normal;
-    DMA_Structure.DMA_PeripheralBaseAddr = (uint32_t)&SPI2->DR;
-    DMA_Structure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_HalfWord;
-    DMA_Structure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-    DMA_Structure.DMA_Priority = DMA_Priority_Medium;
-    DMA_Structure.DMA_BufferSize = chunk_size;
-    DMA_Init(DMA1_Stream4,&DMA_Structure);
+
+    //DMA_Structure.DMA_Memory0BaseAddr = (uint32_t)data; 
+    //DMA_Structure.DMA_BufferSize = chunk_size;
+    //DMA_Structure.DMA_MemoryInc = single_color? DMA_MemoryInc_Disable : DMA_MemoryInc_Enable;
+    DMA1_Stream4->M0AR = (uint32_t)data; 
+    DMA1_Stream4->NDTR = chunk_size;
+    if(single_color)    DMA1_Stream4->CR  &= ~DMA_SxCR_MINC;
+    else                DMA1_Stream4->CR  |= DMA_SxCR_MINC;
+ 
     DMA_Cmd(DMA1_Stream4,ENABLE);    
     while(DMA_GetFlagStatus(DMA1_Stream4,DMA_FLAG_TCIF4) == RESET);
-    DMA_ClearFlag(DMA1_Stream4,DMA_FLAG_TCIF4);   
-    length -= chunk_size;
+    DMA_ClearFlag(DMA1_Stream4,DMA_FLAG_TCIF4); 
+    if(!single_color)    data += chunk_size * 2;  
+    length -= chunk_size;  
     }  while(length > 0);
    while(SPI_GetFlagStatus(SPI2,SPI_I2S_FLAG_BSY) == SET);   
    GPIO_SetBits(CS_PORT, CS_PIN); 
