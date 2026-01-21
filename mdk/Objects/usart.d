@@ -39,3 +39,15 @@
 .\objects\usart.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
 .\objects\usart.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\string.h
 .\objects\usart.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
+.\objects\usart.o: ..\third_lib\freertos\include\FreeRTOS.h
+.\objects\usart.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
+.\objects\usart.o: ..\third_lib\freertos\portable\FreeRTOSConfig.h
+.\objects\usart.o: ..\third_lib\freertos\include\projdefs.h
+.\objects\usart.o: ..\third_lib\freertos\include\portable.h
+.\objects\usart.o: ..\third_lib\freertos\include\deprecated_definitions.h
+.\objects\usart.o: ..\third_lib\freertos\portable\portmacro.h
+.\objects\usart.o: ..\third_lib\freertos\include\mpu_wrappers.h
+.\objects\usart.o: ..\third_lib\freertos\include\semphr.h
+.\objects\usart.o: ..\third_lib\freertos\include\queue.h
+.\objects\usart.o: ..\third_lib\freertos\include\task.h
+.\objects\usart.o: ..\third_lib\freertos\include\list.h

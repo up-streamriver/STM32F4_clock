@@ -1,6 +1,7 @@
 #include "st7789.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "semphr.h"
 /*
 SPI2 SCK PB13
 SPI2 MISO PC2
@@ -24,6 +25,7 @@ LCD_LED PE5
 #define LED_PORT GPIOE
 #define LED_PIN GPIO_Pin_5
 
+static SemaphoreHandle_t write_gram_semaphore;
 
 static void st7789_init_display(void);
 
@@ -70,7 +72,14 @@ static void st7789_spi_init(void)
 }
 static void st7789_interrupt_init(void)
 {
-
+    NVIC_InitTypeDef NVIC_Structure;
+    memset(&NVIC_Structure,0,sizeof(NVIC_Structure));
+    NVIC_Structure.NVIC_IRQChannel = DMA1_Stream4_IRQn;
+    NVIC_Structure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Structure.NVIC_IRQChannelPreemptionPriority = 5;
+    NVIC_Structure.NVIC_IRQChannelSubPriority = 0;
+    NVIC_Init(&NVIC_Structure);
+    NVIC_SetPriority(DMA1_Stream4_IRQn,5);
 }
 
 static void st7789_dma_init(void)
@@ -90,15 +99,21 @@ static void st7789_dma_init(void)
     DMA_Structure.DMA_FIFOThreshold = DMA_FIFOThreshold_Full;
     DMA_Structure.DMA_MemoryBurst = DMA_MemoryBurst_INC8;
     DMA_Structure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
+    DMA_ITConfig(DMA1_Stream4,DMA_IT_TC,ENABLE);
     DMA_Init(DMA1_Stream4,&DMA_Structure);   
 }
 
 void st7789_init(void)
 {
+    write_gram_semaphore = xSemaphoreCreateBinary();
+    configASSERT(write_gram_semaphore);
+
     st7789_spi_init();
 
     st7789_dma_init();
 
+    st7789_interrupt_init();
+    
     st7789_io_init();
     
     st7789_init_display();
@@ -144,8 +159,8 @@ static void st7789_write_gram(uint8_t data[],uint32_t length,bool single_color)
     else                DMA1_Stream4->CR  |= DMA_SxCR_MINC;
  
     DMA_Cmd(DMA1_Stream4,ENABLE);    
-    while(DMA_GetFlagStatus(DMA1_Stream4,DMA_FLAG_TCIF4) == RESET);
-    DMA_ClearFlag(DMA1_Stream4,DMA_FLAG_TCIF4); 
+    xSemaphoreTake(write_gram_semaphore,portMAX_DELAY);
+
     if(!single_color)    data += chunk_size * 2;  
     length -= chunk_size;  
     }  while(length > 0);
@@ -347,4 +362,17 @@ void st7789_draw_image(uint16_t x, uint16_t y,const image_t *font_image)
     st7789_setCursor(x,y,x + width -1,y + height - 1);
     st7789_set_gram_mode();  
     st7789_write_gram((uint8_t *)font_image ->data,length,false);
+}
+
+
+void DMA1_Stream4_IRQHandler(void)
+{
+    if(DMA_GetITStatus(DMA1_Stream4,DMA_IT_TCIF4) == SET)
+    {   
+        BaseType_t pxHigherPriorityTaskWoken;
+        xSemaphoreGiveFromISR(write_gram_semaphore,&pxHigherPriorityTaskWoken);
+        portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
+
+        DMA_ClearITPendingBit(DMA1_Stream4,DMA_IT_TCIF4);
+    }    
 }

@@ -52,3 +52,5 @@
 .\objects\st7789.o: ..\third_lib\freertos\include\mpu_wrappers.h
 .\objects\st7789.o: ..\third_lib\freertos\include\task.h
 .\objects\st7789.o: ..\third_lib\freertos\include\list.h
+.\objects\st7789.o: ..\third_lib\freertos\include\semphr.h
+.\objects\st7789.o: ..\third_lib\freertos\include\queue.h

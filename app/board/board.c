@@ -37,18 +37,18 @@ void board_init(void)
 
 void vAssertCalled(const char *file, int line)
 {
-    usart_printf("Assert Called: %s(%d)\n", file, line);
+    //usart_printf("Assert Called: %s(%d)\n", file, line);
 }
 
 void vApplicationStackOverflowHook( TaskHandle_t xTask, char *pcTaskName)
 {
-    usart_printf("Stack Overflowed: %s\n", pcTaskName);
+   // usart_printf("Stack Overflowed: %s\n", pcTaskName);
     configASSERT(0);
 }
 
 void vApplicationMallocFailedHook( void )
 {
-    usart_printf("Malloc Failed\n");
+   // usart_printf("Malloc Failed\n");
     configASSERT(0);
 }
 

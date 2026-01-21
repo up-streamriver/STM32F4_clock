@@ -41,3 +41,15 @@
 .\objects\esp_at.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
 .\objects\esp_at.o: ..\app\usart\usart.h
 .\objects\esp_at.o: ..\driver\cpu_tick\cpu_tick.h
+.\objects\esp_at.o: ..\third_lib\freertos\include\FreeRTOS.h
+.\objects\esp_at.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
+.\objects\esp_at.o: ..\third_lib\freertos\portable\FreeRTOSConfig.h
+.\objects\esp_at.o: ..\third_lib\freertos\include\projdefs.h
+.\objects\esp_at.o: ..\third_lib\freertos\include\portable.h
+.\objects\esp_at.o: ..\third_lib\freertos\include\deprecated_definitions.h
+.\objects\esp_at.o: ..\third_lib\freertos\portable\portmacro.h
+.\objects\esp_at.o: ..\third_lib\freertos\include\mpu_wrappers.h
+.\objects\esp_at.o: ..\third_lib\freertos\include\task.h
+.\objects\esp_at.o: ..\third_lib\freertos\include\list.h
+.\objects\esp_at.o: ..\third_lib\freertos\include\semphr.h
+.\objects\esp_at.o: ..\third_lib\freertos\include\queue.h
