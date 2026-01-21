@@ -1,4 +1,6 @@
 #include "usart.h"
+#include "FreeRTOS.h"
+#include "semphr.h"
 
 #define USART1_PORT GPIOA
 #define USART1_TX_PIN GPIO_Pin_9
@@ -50,8 +52,9 @@ static void usart_interrupt_init(void)
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
     memset(&NVIC_Structure,0,sizeof(NVIC_Structure));
     NVIC_Structure.NVIC_IRQChannel = USART1_IRQn;
+    NVIC_Structure.NVIC_IRQChannel = DMA2_Stream7_IRQn;
     NVIC_Structure.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Structure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_Structure.NVIC_IRQChannelPreemptionPriority = 5;
     NVIC_Structure.NVIC_IRQChannelSubPriority = 0;
     NVIC_Init(&NVIC_Structure);
 }

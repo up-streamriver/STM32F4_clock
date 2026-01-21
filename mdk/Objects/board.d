@@ -56,3 +56,12 @@
 .\objects\board.o: ..\app\page\page.h
 .\objects\board.o: ..\driver\rtc\rtc.h
 .\objects\board.o: ..\driver\aht20\aht20.h
+.\objects\board.o: ..\third_lib\freertos\include\FreeRTOS.h
+.\objects\board.o: ..\third_lib\freertos\portable\FreeRTOSConfig.h
+.\objects\board.o: ..\third_lib\freertos\include\projdefs.h
+.\objects\board.o: ..\third_lib\freertos\include\portable.h
+.\objects\board.o: ..\third_lib\freertos\include\deprecated_definitions.h
+.\objects\board.o: ..\third_lib\freertos\portable\portmacro.h
+.\objects\board.o: ..\third_lib\freertos\include\mpu_wrappers.h
+.\objects\board.o: ..\third_lib\freertos\include\task.h
+.\objects\board.o: ..\third_lib\freertos\include\list.h

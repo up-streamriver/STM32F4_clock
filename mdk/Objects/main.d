@@ -46,3 +46,12 @@
 .\objects\main.o: ..\driver\cpu_tick\cpu_tick.h
 .\objects\main.o: ..\driver\rtc\rtc.h
 .\objects\main.o: ..\app\app.h
+.\objects\main.o: ..\third_lib\freertos\include\FreeRTOS.h
+.\objects\main.o: ..\third_lib\freertos\portable\FreeRTOSConfig.h
+.\objects\main.o: ..\third_lib\freertos\include\projdefs.h
+.\objects\main.o: ..\third_lib\freertos\include\portable.h
+.\objects\main.o: ..\third_lib\freertos\include\deprecated_definitions.h
+.\objects\main.o: ..\third_lib\freertos\portable\portmacro.h
+.\objects\main.o: ..\third_lib\freertos\include\mpu_wrappers.h
+.\objects\main.o: ..\third_lib\freertos\include\task.h
+.\objects\main.o: ..\third_lib\freertos\include\list.h

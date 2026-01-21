@@ -33,4 +33,6 @@ extern const font_t font54_maple_semibold;
 extern const font_t font64_maple_extrabold;
 extern const font_t font76_maple_extrabold;
 #endif
+
 /*FONT_H */
+

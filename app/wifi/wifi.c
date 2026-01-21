@@ -1,5 +1,7 @@
 #include "wifi.h"
 #include "app.h"
+#include "FreeRTOS.h"
+#include "task.h"
 
 static	esp_wifi_info_t wifi = { 0 };
 static	esp_sntp_info_t date = { 0 };
@@ -33,7 +35,7 @@ err:
     while (1)
     {
         usart_printf("AT Error\r\n");
-        cpu_delay_us(1000 * 1000);
+        vTaskDelay(pdMS_TO_TICKS(1000));
     }		
 }
 
@@ -42,7 +44,7 @@ void wifi_wait_connect(void)
     
     for(uint16_t i=0 ; i<500 ; i++)
     {   
-        cpu_delay_us(1000 *10);
+        vTaskDelay(pdMS_TO_TICKS(10));
         if(!esp_at_connect_wifi(wifi_ssid, wifi_pwd, NULL))
 	    {
             usart_printf("[WIFI] connect failed\n");

@@ -36,3 +36,13 @@
 .\objects\aht20.o: ..\firmware\driver\inc\stm32f4xx_dcmi.h
 .\objects\aht20.o: ..\firmware\driver\inc\stm32f4xx_fsmc.h
 .\objects\aht20.o: ..\driver\cpu_tick\cpu_tick.h
+.\objects\aht20.o: ..\third_lib\freertos\include\FreeRTOS.h
+.\objects\aht20.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
+.\objects\aht20.o: ..\third_lib\freertos\portable\FreeRTOSConfig.h
+.\objects\aht20.o: ..\third_lib\freertos\include\projdefs.h
+.\objects\aht20.o: ..\third_lib\freertos\include\portable.h
+.\objects\aht20.o: ..\third_lib\freertos\include\deprecated_definitions.h
+.\objects\aht20.o: ..\third_lib\freertos\portable\portmacro.h
+.\objects\aht20.o: ..\third_lib\freertos\include\mpu_wrappers.h
+.\objects\aht20.o: ..\third_lib\freertos\include\task.h
+.\objects\aht20.o: ..\third_lib\freertos\include\list.h

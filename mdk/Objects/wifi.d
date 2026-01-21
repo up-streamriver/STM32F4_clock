@@ -43,3 +43,13 @@
 .\objects\wifi.o: ..\driver\esp_at\esp_at.h
 .\objects\wifi.o: ..\driver\cpu_tick\cpu_tick.h
 .\objects\wifi.o: ..\app\app.h
+.\objects\wifi.o: ..\third_lib\freertos\include\FreeRTOS.h
+.\objects\wifi.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
+.\objects\wifi.o: ..\third_lib\freertos\portable\FreeRTOSConfig.h
+.\objects\wifi.o: ..\third_lib\freertos\include\projdefs.h
+.\objects\wifi.o: ..\third_lib\freertos\include\portable.h
+.\objects\wifi.o: ..\third_lib\freertos\include\deprecated_definitions.h
+.\objects\wifi.o: ..\third_lib\freertos\portable\portmacro.h
+.\objects\wifi.o: ..\third_lib\freertos\include\mpu_wrappers.h
+.\objects\wifi.o: ..\third_lib\freertos\include\task.h
+.\objects\wifi.o: ..\third_lib\freertos\include\list.h

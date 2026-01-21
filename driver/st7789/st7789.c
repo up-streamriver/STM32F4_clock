@@ -1,4 +1,6 @@
 #include "st7789.h"
+#include "FreeRTOS.h"
+#include "task.h"
 /*
 SPI2 SCK PB13
 SPI2 MISO PC2
@@ -154,9 +156,9 @@ static void st7789_write_gram(uint8_t data[],uint32_t length,bool single_color)
 static void st7789_reset(void)
 {
     GPIO_ResetBits(RESET_PORT,RESET_PIN);
-    cpu_delay_us(20);
+    vTaskDelay(pdMS_TO_TICKS(1)); //20us
     GPIO_SetBits(RESET_PORT, RESET_PIN);
-    cpu_delay_ms(120);
+    vTaskDelay(pdMS_TO_TICKS(120));
 }
 
 static void st7789_set_backlight(bool on)
@@ -171,7 +173,7 @@ static void st7789_init_display(void)
    
     st7789_write_register(0x11,NULL,0); //sleep out
 
-    cpu_delay_ms(5);
+    vTaskDelay(pdMS_TO_TICKS(5));
 
     st7789_write_register(0x36,(uint8_t[]){0x00},1); //Memory Data Access Control 基本显示配置
     st7789_write_register(0x3A,(uint8_t[]){0x55},1); //设置颜色格式rgb565
@@ -342,7 +344,6 @@ void st7789_draw_image(uint16_t x, uint16_t y,const image_t *font_image)
         return;
     }
     uint32_t length = height * width * 2;
-    uint8_t * data = font_image ->data;
     st7789_setCursor(x,y,x + width -1,y + height - 1);
     st7789_set_gram_mode();  
     st7789_write_gram((uint8_t *)font_image ->data,length,false);

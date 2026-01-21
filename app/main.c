@@ -1,13 +1,13 @@
 #include "page.h"
 #include "app.h"
-
+#include "FreeRTOS.h"
+#include "task.h"
 
 extern void board_lowlevel_init(void);
 extern void board_init(void);
 
-int main(void)
+static void main_init(void *param)
 {
-    board_lowlevel_init();
     board_init();
     
     welcome_page_display();
@@ -16,11 +16,24 @@ int main(void)
     wifi_page_display();
     wifi_wait_connect();
     
-    main_loop_init();
-    main_page_display();
     
-    while (1)
+    main_page_display();
+
+    main_loop_init();
+    
+    vTaskDelete(NULL);
+}
+
+int main(void)
+{
+    board_lowlevel_init();
+
+    xTaskCreate(main_init,"main_init",1024,NULL,10,NULL);
+
+    vTaskStartScheduler();
+    while(1)
     {
-         main_loop();
+        ; //code should not run here
     }
+    return 0;
 }

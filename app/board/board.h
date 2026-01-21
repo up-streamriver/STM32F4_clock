@@ -16,6 +16,8 @@
 #include "page.h"
 #include "rtc.h"
 #include "aht20.h"
+#include "FreeRTOS.h"
+#include "task.h"
 
 
 void board_lowlevel_init(void);

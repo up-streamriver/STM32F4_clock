@@ -51,3 +51,13 @@
 .\objects\mloop.o: ..\app\font\font.h
 .\objects\mloop.o: ..\app\image\image.h
 .\objects\mloop.o: ..\app\app.h
+.\objects\mloop.o: ..\third_lib\freertos\include\FreeRTOS.h
+.\objects\mloop.o: ..\third_lib\freertos\portable\FreeRTOSConfig.h
+.\objects\mloop.o: ..\third_lib\freertos\include\projdefs.h
+.\objects\mloop.o: ..\third_lib\freertos\include\portable.h
+.\objects\mloop.o: ..\third_lib\freertos\include\deprecated_definitions.h
+.\objects\mloop.o: ..\third_lib\freertos\portable\portmacro.h
+.\objects\mloop.o: ..\third_lib\freertos\include\mpu_wrappers.h
+.\objects\mloop.o: ..\third_lib\freertos\include\task.h
+.\objects\mloop.o: ..\third_lib\freertos\include\list.h
+.\objects\mloop.o: ..\third_lib\freertos\include\timers.h

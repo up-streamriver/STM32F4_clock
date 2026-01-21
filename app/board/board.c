@@ -25,7 +25,7 @@ void board_lowlevel_init(void)
 
 void board_init(void)
 {
-    cpu_tick_init();
+    //cpu_tick_init();
     usart_init();
     usart_printf("[SYS] Build Date: %s %s\n", __DATE__, __TIME__);
     
@@ -35,4 +35,20 @@ void board_init(void)
     
 }
 
+void vAssertCalled(const char *file, int line)
+{
+    usart_printf("Assert Called: %s(%d)\n", file, line);
+}
+
+void vApplicationStackOverflowHook( TaskHandle_t xTask, char *pcTaskName)
+{
+    usart_printf("Stack Overflowed: %s\n", pcTaskName);
+    configASSERT(0);
+}
+
+void vApplicationMallocFailedHook( void )
+{
+    usart_printf("Malloc Failed\n");
+    configASSERT(0);
+}
 

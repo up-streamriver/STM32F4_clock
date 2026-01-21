@@ -124,13 +124,13 @@ static at_ack_t esp_at_usart_wait_receive(uint32_t timeout)
 {   
     const char * line = rxbuf;
     uint32_t rxlen = 0;
-    uint64_t start = cpu_get_ms();
+    uint64_t start = xTaskGetTickCount();
     rxbuf[0] = '\0';
     while(rxlen < sizeof(rxbuf) - 1)
     {
         while(USART_GetFlagStatus(USART2,USART_FLAG_RXNE) == RESET)
         {
-            if(cpu_get_ms() - start >= timeout)
+            if(xTaskGetTickCount() - start >= timeout)
                 return AT_ACK_NONE;
         }
         rxbuf[rxlen++] = USART_ReceiveData(USART2);

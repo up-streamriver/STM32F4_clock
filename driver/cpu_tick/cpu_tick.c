@@ -53,9 +53,9 @@ void cpu_register_periodic_callback(cpu_periodic_callback_t callback)
     periodic_callback = callback;
 }
 
-void SysTick_Handler(void)
-{
-    cpu_tick_count += TICKS_PER_MS;
-    if (periodic_callback)
-        periodic_callback();
-}
+// void SysTick_Handler(void)
+// {
+//     cpu_tick_count += TICKS_PER_MS;
+//     if (periodic_callback)
+//         periodic_callback();
+// }
