@@ -1,7 +1,8 @@
 .\objects\wifi_page.o: ..\app\page\wifi_page.c
 .\objects\wifi_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h
 .\objects\wifi_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\string.h
-.\objects\wifi_page.o: ..\driver\st7789\st7789.h
+.\objects\wifi_page.o: ..\app\ui\ui.h
+.\objects\wifi_page.o: ..\app\font\font.h
 .\objects\wifi_page.o: ..\firmware\cmsis\device\stm32f4xx.h
 .\objects\wifi_page.o: ..\firmware\cmsis\core\core_cm4.h
 .\objects\wifi_page.o: ..\firmware\cmsis\core\core_cmInstr.h
@@ -36,11 +37,11 @@
 .\objects\wifi_page.o: ..\firmware\driver\inc\stm32f4xx_dac.h
 .\objects\wifi_page.o: ..\firmware\driver\inc\stm32f4xx_dcmi.h
 .\objects\wifi_page.o: ..\firmware\driver\inc\stm32f4xx_fsmc.h
-.\objects\wifi_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
-.\objects\wifi_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
-.\objects\wifi_page.o: ..\app\font\font.h
 .\objects\wifi_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdio.h
+.\objects\wifi_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
 .\objects\wifi_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
 .\objects\wifi_page.o: ..\app\image\image.h
+.\objects\wifi_page.o: ..\driver\st7789\st7789.h
+.\objects\wifi_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
 .\objects\wifi_page.o: ..\driver\cpu_tick\cpu_tick.h
 .\objects\wifi_page.o: ..\app\app.h

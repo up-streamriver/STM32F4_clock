@@ -3,7 +3,8 @@
 .\objects\main_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\string.h
 .\objects\main_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdio.h
 .\objects\main_page.o: ..\driver\rtc\rtc.h
-.\objects\main_page.o: ..\driver\st7789\st7789.h
+.\objects\main_page.o: ..\app\ui\ui.h
+.\objects\main_page.o: ..\app\font\font.h
 .\objects\main_page.o: ..\firmware\cmsis\device\stm32f4xx.h
 .\objects\main_page.o: ..\firmware\cmsis\core\core_cm4.h
 .\objects\main_page.o: ..\firmware\cmsis\core\core_cmInstr.h
@@ -39,10 +40,10 @@
 .\objects\main_page.o: ..\firmware\driver\inc\stm32f4xx_dcmi.h
 .\objects\main_page.o: ..\firmware\driver\inc\stm32f4xx_fsmc.h
 .\objects\main_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
-.\objects\main_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
-.\objects\main_page.o: ..\app\font\font.h
 .\objects\main_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
 .\objects\main_page.o: ..\app\image\image.h
+.\objects\main_page.o: ..\driver\st7789\st7789.h
+.\objects\main_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
 .\objects\main_page.o: ..\driver\cpu_tick\cpu_tick.h
 .\objects\main_page.o: ..\app\page\page.h
 .\objects\main_page.o: ..\app\app.h

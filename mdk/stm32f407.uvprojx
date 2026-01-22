@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER,HSE_VALUE=8000000</Define>
               <Undefine></Undefine>
-              <IncludePath>..\firmware\cmsis\core;..\firmware\cmsis\device;..\firmware\driver\inc;..\driver;..\app;..\component\ringbuffer;..\app\font;..\driver\led;..\driver\key;..\driver\st7789;..\driver\timer;..\driver\esp_at;..\app\wifi;..\app\board;..\app\usart;..\app\weather;..\app\image;..\driver\cpu_tick;..\app\page;..\driver\rtc;..\driver\aht20;..\third_lib\freertos\include;..\third_lib\freertos\portable</IncludePath>
+              <IncludePath>..\firmware\cmsis\core;..\firmware\cmsis\device;..\firmware\driver\inc;..\driver;..\app;..\component\ringbuffer;..\app\font;..\driver\led;..\driver\key;..\driver\st7789;..\driver\timer;..\driver\esp_at;..\app\wifi;..\app\board;..\app\usart;..\app\weather;..\app\image;..\driver\cpu_tick;..\app\page;..\driver\rtc;..\driver\aht20;..\third_lib\freertos\include;..\third_lib\freertos\portable;..\app\ui</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -579,6 +579,16 @@
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\app\usart\usart.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>app/ui</GroupName>
+          <Files>
+            <File>
+              <FileName>ui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\ui\ui.c</FilePath>
             </File>
           </Files>
         </Group>

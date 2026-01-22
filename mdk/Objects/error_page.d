@@ -1,7 +1,8 @@
 .\objects\error_page.o: ..\app\page\error_page.c
 .\objects\error_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h
 .\objects\error_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\string.h
-.\objects\error_page.o: ..\driver\st7789\st7789.h
+.\objects\error_page.o: ..\app\ui\ui.h
+.\objects\error_page.o: ..\app\font\font.h
 .\objects\error_page.o: ..\firmware\cmsis\device\stm32f4xx.h
 .\objects\error_page.o: ..\firmware\cmsis\core\core_cm4.h
 .\objects\error_page.o: ..\firmware\cmsis\core\core_cmInstr.h
@@ -36,10 +37,10 @@
 .\objects\error_page.o: ..\firmware\driver\inc\stm32f4xx_dac.h
 .\objects\error_page.o: ..\firmware\driver\inc\stm32f4xx_dcmi.h
 .\objects\error_page.o: ..\firmware\driver\inc\stm32f4xx_fsmc.h
-.\objects\error_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
-.\objects\error_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
-.\objects\error_page.o: ..\app\font\font.h
 .\objects\error_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdio.h
+.\objects\error_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
 .\objects\error_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
 .\objects\error_page.o: ..\app\image\image.h
+.\objects\error_page.o: ..\driver\st7789\st7789.h
+.\objects\error_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
 .\objects\error_page.o: ..\driver\cpu_tick\cpu_tick.h

@@ -31,6 +31,7 @@
 ".\objects\wifi.o"
 ".\objects\weather.o"
 ".\objects\usart.o"
+".\objects\ui.o"
 ".\objects\led.o"
 ".\objects\timer.o"
 ".\objects\st7789.o"

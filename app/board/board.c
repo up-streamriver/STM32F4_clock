@@ -31,7 +31,6 @@ void board_init(void)
     
     rtc_init();
     aht20_init();
-    st7789_init();
     
 }
 

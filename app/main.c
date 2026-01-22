@@ -2,6 +2,7 @@
 #include "app.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "ui.h"
 
 extern void board_lowlevel_init(void);
 extern void board_init(void);
@@ -10,6 +11,8 @@ static void main_init(void *param)
 {
     board_init();
     
+    ui_init();
+
     welcome_page_display();
     
     wifi_init();

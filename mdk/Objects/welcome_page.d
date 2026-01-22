@@ -1,8 +1,9 @@
 .\objects\welcome_page.o: ..\app\page\welcome_page.c
-.\objects\welcome_page.o: ..\driver\st7789\st7789.h
+.\objects\welcome_page.o: ..\app\ui\ui.h
+.\objects\welcome_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h
+.\objects\welcome_page.o: ..\app\font\font.h
 .\objects\welcome_page.o: ..\firmware\cmsis\device\stm32f4xx.h
 .\objects\welcome_page.o: ..\firmware\cmsis\core\core_cm4.h
-.\objects\welcome_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdint.h
 .\objects\welcome_page.o: ..\firmware\cmsis\core\core_cmInstr.h
 .\objects\welcome_page.o: ..\firmware\cmsis\core\core_cmFunc.h
 .\objects\welcome_page.o: ..\firmware\cmsis\core\core_cmSimd.h
@@ -35,11 +36,11 @@
 .\objects\welcome_page.o: ..\firmware\driver\inc\stm32f4xx_dac.h
 .\objects\welcome_page.o: ..\firmware\driver\inc\stm32f4xx_dcmi.h
 .\objects\welcome_page.o: ..\firmware\driver\inc\stm32f4xx_fsmc.h
-.\objects\welcome_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
-.\objects\welcome_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
-.\objects\welcome_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\string.h
-.\objects\welcome_page.o: ..\app\font\font.h
 .\objects\welcome_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdio.h
+.\objects\welcome_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
+.\objects\welcome_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\string.h
 .\objects\welcome_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
 .\objects\welcome_page.o: ..\app\image\image.h
+.\objects\welcome_page.o: ..\driver\st7789\st7789.h
+.\objects\welcome_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
 .\objects\welcome_page.o: ..\driver\cpu_tick\cpu_tick.h

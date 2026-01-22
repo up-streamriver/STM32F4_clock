@@ -55,3 +55,4 @@
 .\objects\main.o: ..\third_lib\freertos\include\mpu_wrappers.h
 .\objects\main.o: ..\third_lib\freertos\include\task.h
 .\objects\main.o: ..\third_lib\freertos\include\list.h
+.\objects\main.o: ..\app\ui\ui.h
