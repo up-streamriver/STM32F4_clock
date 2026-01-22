@@ -14,6 +14,7 @@ void board_lowlevel_init(void)
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6,ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C2,ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6,ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1,ENABLE);
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2,ENABLE);
@@ -30,6 +31,7 @@ void board_init(void)
     usart_printf("[SYS] Build Date: %s %s\n", __DATE__, __TIME__);
     
     rtc_init();
+    tim_delay_init();
     aht20_init();
     
 }

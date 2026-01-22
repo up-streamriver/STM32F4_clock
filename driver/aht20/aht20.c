@@ -1,9 +1,10 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include "stm32f4xx.h"
-#include "cpu_tick.h"
+
 #include "FreeRTOS.h"
 #include "task.h"
+#include "tim_delay.h"
 
 static bool aht20_write(uint8_t data[], uint32_t length);
 static bool aht20_read(uint8_t data[], uint32_t length);
@@ -53,7 +54,7 @@ bool aht20_init(void)
     do { \
         uint32_t timeout = TIMEOUT; \
         while (!I2C_CheckEvent(I2C2, EVENT) && timeout > 0) { \
-            vTaskDelay(pdMS_TO_TICKS(1)); \
+            tim_delay_us(10); \
             timeout -= 10; \
         } \
         if (timeout <= 0) \

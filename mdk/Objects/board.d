@@ -48,7 +48,6 @@
 .\objects\board.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
 .\objects\board.o: ..\app\font\font.h
 .\objects\board.o: ..\app\image\image.h
-.\objects\board.o: ..\driver\cpu_tick\cpu_tick.h
 .\objects\board.o: ..\driver\esp_at\esp_at.h
 .\objects\board.o: ..\app\weather\weather.h
 .\objects\board.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdlib.h
@@ -65,3 +64,4 @@
 .\objects\board.o: ..\third_lib\freertos\include\mpu_wrappers.h
 .\objects\board.o: ..\third_lib\freertos\include\task.h
 .\objects\board.o: ..\third_lib\freertos\include\list.h
+.\objects\board.o: ..\driver\tim_delay\tim_delay.h

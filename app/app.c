@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
-#include "cpu_tick.h"
+
 #include "rtc.h"
 #include "aht20.h"
 #include "esp_at.h"
@@ -13,6 +13,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "timers.h"
+#include "workqueue.h"
 
 #define MILLISECONDS(x) (x)
 #define SECONDS(x)      MILLISECONDS((x) * 1000)
@@ -218,45 +219,60 @@ static void outdoor_update(void)
 }
 
 
-static void main_loop_func(void *param)
-{
-    uint32_t event;
+// static void main_loop_func(void *param)
+// {
+//     uint32_t event;
     
-    while(1)
-    {   
-        event = ulTaskNotifyTake(pdFALSE,portMAX_DELAY);
+//     while(1)
+//     {   
+//         event = ulTaskNotifyTake(pdFALSE,portMAX_DELAY);
 
-        if(event & MLOOP_EVT_TIME_SYNC)
-            time_sync();
-        if(event & MLOOP_EVT_WIFI_UPDATE)
-            wifi_update();
-        if(event & MLOOP_EVT_TIME_UPDATE)
-            time_update();
-        if(event & MLOOP_EVT_INNER_UPDATE)
-            inner_update();
-        if(event & MLOOP_EVT_OUTDOOR_UPDATE)
-            outdoor_update();
-    }
+//         if(event & MLOOP_EVT_TIME_SYNC)
+//             time_sync();
+//         if(event & MLOOP_EVT_WIFI_UPDATE)
+//             wifi_update();
+//         if(event & MLOOP_EVT_TIME_UPDATE)
+//             time_update();
+//         if(event & MLOOP_EVT_INNER_UPDATE)
+//             inner_update();
+//         if(event & MLOOP_EVT_OUTDOOR_UPDATE)
+//             outdoor_update();
+//     }
+// }
+
+typedef void (*app_job_t)(void);
+
+static void app_work(void *param)
+{
+    app_job_t job = (app_job_t)param;
+    job();
+}
+
+static void work_time_cb(TimerHandle_t timer)
+{
+   app_job_t job = pvTimerGetTimerID(timer);
+   workqueue_run(app_work,job);
 }
 
 
-
-static void time_sync_cb(TimerHandle_t timer)
+static void app_time_cb(TimerHandle_t timer)
 {
-    uint32_t event = (uint32_t)pvTimerGetTimerID(timer);
-    xTaskNotify(main_loop_func,event,eSetBits);
+   app_job_t job = pvTimerGetTimerID(timer);
+   job();
 }
 
 void main_loop_init(void)
 {   
-    time_sycn_timer = xTimerCreate("time sync",1,pdFALSE,(void *)MLOOP_EVT_TIME_SYNC,time_sync_cb);
-    wifi_update_timer = xTimerCreate("wifi update",pdMS_TO_TICKS(WIFI_UPDATE_INTERVAL),pdTRUE,(void *)MLOOP_EVT_WIFI_UPDATE,time_sync_cb);
-    time_update_timer = xTimerCreate("time update",pdMS_TO_TICKS(TIME_UPDATE_INTERVAL),pdTRUE,(void *)MLOOP_EVT_TIME_UPDATE,time_sync_cb);
-    inner_update_timer = xTimerCreate("inner update",pdMS_TO_TICKS(INNER_UPDATE_INTERVAL),pdTRUE,(void *)MLOOP_EVT_INNER_UPDATE,time_sync_cb);
-    outdoor_update_timer = xTimerCreate("outdoor update",pdMS_TO_TICKS(OUTDOOR_UPDATE_INTERVAL),pdTRUE,(void *)MLOOP_EVT_OUTDOOR_UPDATE,time_sync_cb);
+    time_sycn_timer = xTimerCreate("time sync",1,pdFALSE,(void *)time_sync,app_time_cb);
+    wifi_update_timer = xTimerCreate("wifi update",pdMS_TO_TICKS(WIFI_UPDATE_INTERVAL),pdTRUE,(void *)wifi_update,work_time_cb);
+    time_update_timer = xTimerCreate("time update",pdMS_TO_TICKS(TIME_UPDATE_INTERVAL),pdTRUE,(void *)time_update,work_time_cb);
+    inner_update_timer = xTimerCreate("inner update",pdMS_TO_TICKS(INNER_UPDATE_INTERVAL),pdTRUE,(void *)inner_update,work_time_cb);
+    outdoor_update_timer = xTimerCreate("outdoor update",pdMS_TO_TICKS(OUTDOOR_UPDATE_INTERVAL),pdTRUE,(void *)outdoor_update,work_time_cb);
 
-    xTaskCreate(main_loop_func,"mloop",1024,NULL,5,&mloop_task);
-    xTaskNotify(mloop_task,MLOOP_EVT_ALL,eSetBits);
+    workqueue_run(app_work,time_sync);
+    workqueue_run(app_work,wifi_update);
+    workqueue_run(app_work,inner_update);
+    workqueue_run(app_work,outdoor_update);
     
     xTimerStart(time_sycn_timer,0);
     xTimerStart(wifi_update_timer,0);

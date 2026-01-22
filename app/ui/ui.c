@@ -98,7 +98,7 @@ void ui_init(void)
 {
     ui_queue = xQueueCreate(16,sizeof(ui_message_t));
     configASSERT(ui_queue);
-    xTaskCreate(ui_func,"ui",2048,NULL,8,NULL);
+    xTaskCreate(ui_func,"ui",1024,NULL,8,NULL);
 }
 
 void ui_fill_color(uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2,uint16_t color)

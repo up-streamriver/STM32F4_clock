@@ -3,6 +3,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "ui.h"
+#include "workqueue.h"
 
 extern void board_lowlevel_init(void);
 extern void board_init(void);
@@ -30,7 +31,7 @@ static void main_init(void *param)
 int main(void)
 {
     board_lowlevel_init();
-
+    workqueue_init();
     xTaskCreate(main_init,"main_init",1024,NULL,10,NULL);
 
     vTaskStartScheduler();

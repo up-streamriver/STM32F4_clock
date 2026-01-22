@@ -43,7 +43,6 @@
 .\objects\main.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdio.h
 .\objects\main.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
 .\objects\main.o: ..\app\image\image.h
-.\objects\main.o: ..\driver\cpu_tick\cpu_tick.h
 .\objects\main.o: ..\driver\rtc\rtc.h
 .\objects\main.o: ..\app\app.h
 .\objects\main.o: ..\third_lib\freertos\include\FreeRTOS.h
@@ -56,3 +55,4 @@
 .\objects\main.o: ..\third_lib\freertos\include\task.h
 .\objects\main.o: ..\third_lib\freertos\include\list.h
 .\objects\main.o: ..\app\ui\ui.h
+.\objects\main.o: ..\app\workqueue\workqueue.h

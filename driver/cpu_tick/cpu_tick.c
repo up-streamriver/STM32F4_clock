@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <string.h>
 #include "stm32f4xx.h"
-#include "cpu_tick.h"
+
 
 #define TICKS_PER_MS    (SystemCoreClock / 1000)
 #define TICKS_PER_US    (SystemCoreClock / 1000000)

@@ -42,5 +42,4 @@
 .\objects\weather.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdlib.h
 .\objects\weather.o: ..\driver\esp_at\esp_at.h
 .\objects\weather.o: ..\app\usart\usart.h
-.\objects\weather.o: ..\driver\cpu_tick\cpu_tick.h
 .\objects\weather.o: ..\app\app.h

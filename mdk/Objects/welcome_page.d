@@ -43,4 +43,3 @@
 .\objects\welcome_page.o: ..\app\image\image.h
 .\objects\welcome_page.o: ..\driver\st7789\st7789.h
 .\objects\welcome_page.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
-.\objects\welcome_page.o: ..\driver\cpu_tick\cpu_tick.h

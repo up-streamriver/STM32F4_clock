@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER,HSE_VALUE=8000000</Define>
               <Undefine></Undefine>
-              <IncludePath>..\firmware\cmsis\core;..\firmware\cmsis\device;..\firmware\driver\inc;..\driver;..\app;..\component\ringbuffer;..\app\font;..\driver\led;..\driver\key;..\driver\st7789;..\driver\timer;..\driver\esp_at;..\app\wifi;..\app\board;..\app\usart;..\app\weather;..\app\image;..\driver\cpu_tick;..\app\page;..\driver\rtc;..\driver\aht20;..\third_lib\freertos\include;..\third_lib\freertos\portable;..\app\ui</IncludePath>
+              <IncludePath>..\firmware\cmsis\core;..\firmware\cmsis\device;..\firmware\driver\inc;..\driver;..\app;..\component\ringbuffer;..\app\font;..\driver\led;..\driver\key;..\driver\st7789;..\driver\timer;..\driver\esp_at;..\app\wifi;..\app\board;..\app\usart;..\app\weather;..\app\image;..\driver\tim_delay;..\app\page;..\driver\rtc;..\driver\aht20;..\third_lib\freertos\include;..\third_lib\freertos\portable;..\app\ui;..\app\workqueue</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -391,9 +391,9 @@
               <FilePath>..\app\main.c</FilePath>
             </File>
             <File>
-              <FileName>mloop.c</FileName>
+              <FileName>app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\app\mloop.c</FilePath>
+              <FilePath>..\app\app.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -593,6 +593,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>app/workqueue</GroupName>
+          <Files>
+            <File>
+              <FileName>workqueue.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\app\workqueue\workqueue.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>driver</GroupName>
         </Group>
         <Group>
@@ -646,7 +656,14 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>driver/cpu_tick</GroupName>
+          <GroupName>driver/tim_delay</GroupName>
+          <Files>
+            <File>
+              <FileName>tim_delay.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\driver\tim_delay\tim_delay.c</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>driver/rtc</GroupName>

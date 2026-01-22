@@ -42,7 +42,6 @@
 .\objects\st7789.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdio.h
 .\objects\st7789.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
 .\objects\st7789.o: ..\app\image\image.h
-.\objects\st7789.o: ..\driver\cpu_tick\cpu_tick.h
 .\objects\st7789.o: ..\third_lib\freertos\include\FreeRTOS.h
 .\objects\st7789.o: ..\third_lib\freertos\portable\FreeRTOSConfig.h
 .\objects\st7789.o: ..\third_lib\freertos\include\projdefs.h

@@ -8,7 +8,7 @@
 #include <string.h>
 #include "font.h"
 #include "image.h"
-#include "cpu_tick.h"
+
 
 #define st7789_WIDTH 240
 #define st7789_HEIGHT 320

@@ -54,4 +54,3 @@
 .\objects\ui.o: ..\app\font\font.h
 .\objects\ui.o: ..\app\image\image.h
 .\objects\ui.o: ..\driver\st7789\st7789.h
-.\objects\ui.o: ..\driver\cpu_tick\cpu_tick.h

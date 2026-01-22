@@ -35,7 +35,6 @@
 .\objects\aht20.o: ..\firmware\driver\inc\stm32f4xx_dac.h
 .\objects\aht20.o: ..\firmware\driver\inc\stm32f4xx_dcmi.h
 .\objects\aht20.o: ..\firmware\driver\inc\stm32f4xx_fsmc.h
-.\objects\aht20.o: ..\driver\cpu_tick\cpu_tick.h
 .\objects\aht20.o: ..\third_lib\freertos\include\FreeRTOS.h
 .\objects\aht20.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
 .\objects\aht20.o: ..\third_lib\freertos\portable\FreeRTOSConfig.h
@@ -46,3 +45,4 @@
 .\objects\aht20.o: ..\third_lib\freertos\include\mpu_wrappers.h
 .\objects\aht20.o: ..\third_lib\freertos\include\task.h
 .\objects\aht20.o: ..\third_lib\freertos\include\list.h
+.\objects\aht20.o: ..\driver\tim_delay\tim_delay.h
