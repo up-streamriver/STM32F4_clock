@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\stm32f407.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\stm32f407.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Thu Jan 22 22:37:52 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sun Feb 01 12:35:10 2026
 <BR><P>
 <H3>Maximum Stack Usage =        740 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1182,12 +1182,12 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[63]"></a>_sgetc</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, _sgetc.o(.text))
-<BR>[Address Reference Count : 2]<UL><LI> strtod.o(.text)
-<LI> __0sscanf.o(.text)
+<BR>[Address Reference Count : 2]<UL><LI> __0sscanf.o(.text)
+<LI> strtod.o(.text)
 </UL>
 <P><STRONG><a name="[64]"></a>_sbackspace</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, _sgetc.o(.text))
-<BR>[Address Reference Count : 2]<UL><LI> strtod.o(.text)
-<LI> __0sscanf.o(.text)
+<BR>[Address Reference Count : 2]<UL><LI> __0sscanf.o(.text)
+<LI> strtod.o(.text)
 </UL>
 <P><STRONG><a name="[de]"></a>__strtod_int</STRONG> (Thumb, 90 bytes, Stack size 40 bytes, strtod.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 436<LI>Call Chain = __strtod_int &rArr; _local_sscanf &rArr; _scanf_real &rArr; _scanf_really_real &rArr; _fp_value &rArr; _btod_etento &rArr; _btod_emul &rArr; _e2e
@@ -1226,8 +1226,8 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_ctype_table
 </UL>
-<BR>[Address Reference Count : 2]<UL><LI> strtod.o(.text)
-<LI> scanf_char.o(.text)
+<BR>[Address Reference Count : 2]<UL><LI> scanf_char.o(.text)
+<LI> strtod.o(.text)
 </UL>
 <P><STRONG><a name="[e0]"></a>_printf_fp_hex_real</STRONG> (Thumb, 756 bytes, Stack size 72 bytes, _printf_fp_hex.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = _printf_fp_hex_real &rArr; _printf_fp_infnan &rArr; _printf_post_padding
@@ -3221,7 +3221,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[16b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vTaskStartScheduler
 </UL>
 
-<P><STRONG><a name="[164]"></a>xTimerGenericCommand</STRONG> (Thumb, 108 bytes, Stack size 48 bytes, timers.o(i.xTimerGenericCommand))
+<P><STRONG><a name="[164]"></a>xTimerGenericCommand</STRONG> (Thumb, 110 bytes, Stack size 48 bytes, timers.o(i.xTimerGenericCommand))
 <BR><BR>[Stack]<UL><LI>Max Depth = 192<LI>Call Chain = xTimerGenericCommand &rArr; xQueueGenericSend &rArr; prvUnlockQueue &rArr; prvNotifyQueueSetContainer &rArr; prvCopyDataToQueue &rArr; xTaskPriorityDisinherit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[14e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;vAssertCalled
@@ -4210,7 +4210,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[1a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;prvProcessTimerOrBlockTask
 </UL>
 
-<P><STRONG><a name="[1a5]"></a>prvProcessReceivedCommands</STRONG> (Thumb, 232 bytes, Stack size 40 bytes, timers.o(i.prvProcessReceivedCommands))
+<P><STRONG><a name="[1a5]"></a>prvProcessReceivedCommands</STRONG> (Thumb, 246 bytes, Stack size 40 bytes, timers.o(i.prvProcessReceivedCommands))
 <BR><BR>[Stack]<UL><LI>Max Depth = 272<LI>Call Chain = prvProcessReceivedCommands &rArr; prvSampleTimeNow &rArr; prvSwitchTimerLists &rArr; xTimerGenericCommand &rArr; xQueueGenericSend &rArr; prvUnlockQueue &rArr; prvNotifyQueueSetContainer &rArr; prvCopyDataToQueue &rArr; xTaskPriorityDisinherit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[164]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;xTimerGenericCommand
