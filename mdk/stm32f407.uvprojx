@@ -83,7 +83,7 @@
           <AfterMake>
             <RunUserProg1>1</RunUserProg1>
             <RunUserProg2>0</RunUserProg2>
-            <UserProg1Name>F:\Keil_v5\ARM\ARMCLANG\bin\fromelf.exe --bin --output ../OBJ/stm32f407.bin</UserProg1Name>
+            <UserProg1Name>fromelf.exe --bin -o "$L@L.bin" "#L"</UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
@@ -278,7 +278,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x80000</Size>
+                <Size>0x70000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
