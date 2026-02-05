@@ -56,3 +56,6 @@
 .\objects\main.o: ..\third_lib\freertos\include\list.h
 .\objects\main.o: ..\app\ui\ui.h
 .\objects\main.o: ..\app\workqueue\workqueue.h
+.\objects\main.o: ..\driver\key\key.h
+.\objects\main.o: ..\driver\led\led.h
+.\objects\main.o: ..\app\usart\usart.h

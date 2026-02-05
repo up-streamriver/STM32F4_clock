@@ -154,7 +154,7 @@
 #define USART1_TX_PIN GPIO_Pin_9
 #define USART1_RX_PIN GPIO_Pin_10
 
-
+static SemaphoreHandle_t usart_write_sempahore;
 usart_recv_callback_t usart_recv_callback;
 
 void usart_recv_handler_register(usart_recv_callback_t callback)
@@ -228,16 +228,20 @@ static void usart_dma_init(void)
 }
 
 void usart_init(void)
-{
+{   
+    usart_write_sempahore = xSemaphoreCreateBinary();
+    configASSERT(usart_write_sempahore);
     usart_usart_init();
     usart_dma_init();   
     usart_interrupt_init();
     usart_io_init();
+    xSemaphoreGive(usart_write_sempahore);
 }   
 
 
 void usart_write_data(uint8_t *data,uint32_t length)
 {	
+    xSemaphoreTake(usart_write_sempahore,pdMS_TO_TICKS(10));
     DMA2_Stream7->M0AR = (uint32_t)data; 
     DMA2_Stream7->NDTR = length;
     DMA_Cmd(DMA2_Stream7,ENABLE);
@@ -245,6 +249,7 @@ void usart_write_data(uint8_t *data,uint32_t length)
     DMA_ClearFlag(DMA2_Stream7,DMA_FLAG_TCIF7);   
     while(USART_GetFlagStatus(USART1,USART_FLAG_TC) == RESET);    
     USART_ClearFlag(USART1,USART_FLAG_TC);
+    xSemaphoreGive(usart_write_sempahore);
 }
 
 void usart_write_string(const char *str)

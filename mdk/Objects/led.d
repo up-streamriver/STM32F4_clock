@@ -37,3 +37,13 @@
 .\objects\led.o: ..\firmware\driver\inc\stm32f4xx_fsmc.h
 .\objects\led.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdio.h
 .\objects\led.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdbool.h
+.\objects\led.o: ..\third_lib\freertos\include\FreeRTOS.h
+.\objects\led.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
+.\objects\led.o: ..\third_lib\freertos\portable\FreeRTOSConfig.h
+.\objects\led.o: ..\third_lib\freertos\include\projdefs.h
+.\objects\led.o: ..\third_lib\freertos\include\portable.h
+.\objects\led.o: ..\third_lib\freertos\include\deprecated_definitions.h
+.\objects\led.o: ..\third_lib\freertos\portable\portmacro.h
+.\objects\led.o: ..\third_lib\freertos\include\mpu_wrappers.h
+.\objects\led.o: ..\third_lib\freertos\include\task.h
+.\objects\led.o: ..\third_lib\freertos\include\list.h

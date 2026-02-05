@@ -12,10 +12,10 @@ void board_lowlevel_init(void)
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2,ENABLE);
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG,ENABLE);
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3,ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6,ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C2,ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_SPI2, ENABLE);
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM6,ENABLE);
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR, ENABLE);
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA1,ENABLE);
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2,ENABLE);
@@ -30,11 +30,14 @@ void board_init(void)
     //cpu_tick_init();
     usart_init();
     usart_printf("[SYS] Build Date: %s %s\n", __DATE__, __TIME__);
-    
+    //led_init();
+
+    key_init();
     rtc_init();
     tim_delay_init();
     aht20_init();
-    
+    led_pwm_init();
+    usart_printf("led pwm init \r\n");
 }
 
 void vAssertCalled(const char *file, int line)

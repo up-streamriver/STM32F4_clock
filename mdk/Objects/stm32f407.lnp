@@ -37,6 +37,7 @@
 ".\objects\timer.o"
 ".\objects\st7789.o"
 ".\objects\key.o"
+".\objects\key_task.o"
 ".\objects\esp_at.o"
 ".\objects\tim_delay.o"
 ".\objects\rtc.o"

@@ -4,6 +4,7 @@
 #include "task.h"
 #include "ui.h"
 #include "workqueue.h"
+#include "key.h"
 
 extern void board_lowlevel_init(void);
 extern void board_init(void);
@@ -11,7 +12,7 @@ extern void board_init(void);
 static void main_init(void *param)
 {
     board_init();
-    
+
     ui_init();
 
     welcome_page_display();
@@ -24,7 +25,7 @@ static void main_init(void *param)
     main_page_display();
 
     main_loop_init();
-    
+    key_timer_init();
     vTaskDelete(NULL);
 }
 

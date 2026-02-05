@@ -643,6 +643,11 @@
               <FileType>1</FileType>
               <FilePath>..\driver\key\key.c</FilePath>
             </File>
+            <File>
+              <FileName>key_task.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\driver\key\key_task.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
