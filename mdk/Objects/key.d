@@ -41,3 +41,16 @@
 .\objects\key.o: ..\driver\led\led.h
 .\objects\key.o: ..\app\usart\usart.h
 .\objects\key.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stdarg.h
+.\objects\key.o: ..\third_lib\freertos\include\FreeRTOS.h
+.\objects\key.o: F:\Keil_v5\ARM\ARMCOMPLIER506\Bin\..\include\stddef.h
+.\objects\key.o: ..\third_lib\freertos\portable\FreeRTOSConfig.h
+.\objects\key.o: ..\third_lib\freertos\include\projdefs.h
+.\objects\key.o: ..\third_lib\freertos\include\portable.h
+.\objects\key.o: ..\third_lib\freertos\include\deprecated_definitions.h
+.\objects\key.o: ..\third_lib\freertos\portable\portmacro.h
+.\objects\key.o: ..\third_lib\freertos\include\mpu_wrappers.h
+.\objects\key.o: ..\third_lib\freertos\include\task.h
+.\objects\key.o: ..\third_lib\freertos\include\list.h
+.\objects\key.o: ..\third_lib\freertos\include\queue.h
+.\objects\key.o: ..\third_lib\freertos\include\semphr.h
+.\objects\key.o: ..\third_lib\freertos\include\timers.h
